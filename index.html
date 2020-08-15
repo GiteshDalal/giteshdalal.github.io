@@ -34,7 +34,8 @@
         <div class="content text-left">
             <div class="jumbotron text-dark">
                 <h1 class="display-4">Read Easy</h1>
-                <p class="lead">An easy to use text reader chrome browser extension. Removes clutter and improves readability. Lets you focus on
+                <p class="lead">An easy to use text reader chrome browser extension. Removes clutter and improves
+                    readability. Lets you focus on
                     what you want to read. Great for reading articles, web novels and blog posts. </p>
                 <figure class="figure mb-4">
                     <img src="assets/marquee.png" class="figure-img img-fluid rounded" alt="Read Easy">
@@ -42,12 +43,26 @@
                         NOTE: Read Easy works best for web pages that have a lot of content.
                     </figcaption>
                 </figure>
-                <p class="text-center my-4">
-                    <a class="btn btn-primary btn-lg shadow" href="assets/extension.crx" role="button">Install now</a>
-                    <br />
-                    <small class="text-muted">Version 1.0.0</small>
-                </p>
-                <p class="lead">To install, just click on install now button to download .crx file. Then drag and drop it in chrome browser window.</p>
+                <div class="my-4 row">
+                    <div class="col">
+                        <a class="btn btn-primary btn-lg" href="assets/extension.crx" role="button">Download
+                            now</a>
+                        <br />
+                        <small class="text-muted">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Version 1.0.1
+                        </small>
+                    </div>
+                    <div class="col text-right">
+                        <button type="button" class="btn btn-outline-dark btn-lg" data-toggle="modal"
+                            data-target="#feedbackModal">
+                            Feedback form
+                        </button>
+                        <br />
+                        <small class="text-muted">Report issue/Request feature</small>
+                    </div>
+                </div>
+                <p class="lead">To install, just click on install now button to download .crx file. Then drag and drop
+                    it in chrome browser window.</p>
                 <hr class="my-4">
                 <p class="lead"><strong>Features</strong></p>
                 <ol class="lead">
@@ -71,6 +86,24 @@
                         Kumar</a>.</p>
             </div>
         </footer>
+        <div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog text-dark">
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Report issue</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                        <iframe
+                            src="https://docs.google.com/forms/d/e/1FAIpQLScDJuSR_PlVi1ECejUJ_0Gvqi8BlnTt4xa0vTzEc9PPG_mk8A/viewform?embedded=true"
+                            width="480" height="937" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
