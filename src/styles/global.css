@@ -9,6 +9,7 @@
   --measure: 42rem;
   --measure-wide: 48rem;
   --font-sans: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  --font-display: "Syne", var(--font-sans);
   --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   color-scheme: light;
@@ -80,8 +81,28 @@ a:hover {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 1.5rem 0;
+  padding: 1.25rem 0;
   border-bottom: 1px solid var(--border);
+}
+
+.site-logo {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--fg);
+  line-height: 1;
+}
+
+.site-logo:hover {
+  color: var(--link);
+}
+
+.site-logo-mark {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.85rem, 3.5vw, 2.35rem);
+  letter-spacing: -0.04em;
+  line-height: 1;
 }
 
 .site-nav {
@@ -158,9 +179,10 @@ a:hover {
 .prose h1,
 .prose h2,
 .prose h3 {
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
   line-height: 1.25;
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 .prose code {
@@ -205,10 +227,10 @@ a:hover {
 }
 
 .section-title {
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
   font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
+  font-weight: 700;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--muted);
   margin: 0 0 0.4rem;
@@ -222,10 +244,10 @@ a:hover {
 }
 
 .subsection-title {
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
   font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.03em;
+  font-weight: 700;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--muted);
   margin: 1.5rem 0 0.25rem;
@@ -243,10 +265,11 @@ a:hover {
 }
 
 .identity {
-  font-family: var(--font-sans);
-  font-size: clamp(1.2rem, 2.5vw, 1.4rem);
-  font-weight: 600;
-  line-height: 1.35;
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.6vw, 1.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
   margin: 0 0 0.65rem;
 }
 
@@ -303,20 +326,21 @@ a:hover {
 }
 
 .featured-label {
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
   font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
+  font-weight: 700;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--link);
   margin: 0 0 0.5rem;
 }
 
 .featured-title {
-  font-family: var(--font-sans);
-  font-size: clamp(1.35rem, 2.5vw, 1.7rem);
-  font-weight: 600;
-  line-height: 1.25;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.6vw, 1.8rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
   margin: 0 0 0.4rem;
 }
 
@@ -367,9 +391,11 @@ a:hover {
 }
 
 .post-list a {
+  font-family: var(--font-display);
   color: var(--fg);
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 700;
+  letter-spacing: -0.015em;
 }
 
 .post-list a:hover {
@@ -390,19 +416,20 @@ a:hover {
 }
 
 .project-card-eyebrow {
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
   font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
+  font-weight: 700;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--muted);
   margin: 0 0 0.4rem;
 }
 
 .project-card-title {
-  font-family: var(--font-sans);
-  font-size: 1.15rem;
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   margin: 0 0 0.35rem;
 }
 
@@ -442,9 +469,11 @@ a:hover {
 }
 
 .page-title {
-  font-family: var(--font-sans);
-  font-size: clamp(1.75rem, 3vw, 2.25rem);
-  line-height: 1.2;
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 3.2vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
   margin: 0 0 0.5rem;
 }
 
