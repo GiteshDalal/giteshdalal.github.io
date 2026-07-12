@@ -40,7 +40,7 @@ My AI Development Stack (2024)
 
 The real test came when I applied it to a personal project: building a heavy Go-based e-commerce platform. Most enterprise platforms are built on Java, making them costly to run. Leveraging my e-commerce background, I wanted to build something highly efficient and cheap to operate using Go.
 
-With Codium's autocomplete, I wrote all the core modules — pricing, catalog, checkout, and inventory — within just one and a half months. While its early step-planning multi-file features (which evolved into WinServe and later Devin paradigms) felt clunky and required frequent rejections, the localized multi-place editing capabilities completely changed my development velocity. It remained my primary editor for nearly a year.
+With Codium's autocomplete, I wrote all the core modules — pricing, catalog, checkout, and inventory — within just one and a half months. While its early step-planning multi-file features (which was renamed to Windsurf and later Devin AI) felt clunky and required frequent rejections, the localized multi-place editing capabilities completely changed my development velocity. It remained my primary editor for nearly a year.
 
 ---
 
@@ -160,9 +160,9 @@ Today, the tooling ecosystem is radically different, and I select models based e
          ▼                       ▼                       ▼
 ┌──────────────────┐    ┌─────────────────┐     ┌─────────────────┐
 │ Deep Architecture│    │ Agentic Coding  │     │ Blazing Fast    │
-│   & Planning     │    │  & Open Keys    │     │ Iteration & PRs │
+│   & Planning     │    │ & Open Sub Key  │     │ Iteration       │
 ├──────────────────┤    ├─────────────────┤     ├─────────────────┤
-│   Model: Fable   │    │  Model: Codex   │     │ Model: Grok 4.5 │
+│ Model: Fable/Opus│    │  Model:GPT-5.6  │     │ Model: Grok 4.5 │
 └──────────────────┘    └─────────────────┘     └─────────────────┘
 ```
 
@@ -178,11 +178,11 @@ For deep cloud architecture, system design, and security vulnerability scanning,
 
 ### 2. OpenAI GPT Codex: The Playground for Engineers
 
-If you want to escape ecosystem lock-in, GPT Codex is the current gold standard. Anthropic has increasingly locked down Claude Code, preventing developers from using their API keys in third-party development harnesses. Codex allows total freedom. You can plug it into custom orchestration rigs like Hermes, Pi, or OpenCode. If you practice strict spec-driven development instead of vibe coding, Codex inside a customized harness delivers pristine production results.
+If you want to escape ecosystem lock-in, Open AI plans are the current gold standard. Anthropic has increasingly locked down Claude Code, preventing developers from using their Subscriptions keys in third-party development harnesses. Open AI allows total freedom. You can plug in your subscription API key into custom orchestration rigs like Hermes, Pi, or OpenCode. If you practice strict spec-driven development instead of vibe coding, GPT-5.6 models inside a customized harness delivers pristine production results.
 
 ### 3. Grok 4.5: The Speed Daemon
 
-Grok 4.5 has become an absolute favorite for daily iteration. While its raw cognitive capacity sits closer to Sonnet-level performance rather than the heavy-lifting tiers of Fable or GPT 5.6, it is blazingly fast and highly cost-effective. Thanks to modern agentic frameworks (like the paradigms popularized by Orent, which teach base models how to construct their own execution environments), a highly responsive model like Grok 4.5 can comfortably achieve elite production outputs without needing the most expensive reasoning models for every single line of code.
+Grok 4.5 has become an absolute favorite of mine for daily iteration. I was hooked on day one becuase of its fast speed, and fast is not behind a paywall - its just fast by default. While its raw cognitive capacity sits closer to Sonnet-level performance rather than the heavy-lifting tiers of Fable or GPT 5.6, it is blazingly fast and highly cost-effective. Thanks to spec driven Agentic Engineering skills, a highly responsive model like Grok 4.5 can comfortably achieve elite production outputs without needing the most expensive reasoning models for every single line of code.
 
 ---
 
