@@ -1,33 +1,71 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import FeaturedPost from '../components/FeaturedPost.astro';
 import PostList from '../components/PostList.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import { getPublishedPosts, getProjects } from '../lib/content';
 
-const posts = (await getPublishedPosts()).slice(0, 5);
+const published = await getPublishedPosts();
+const featured = published[0];
+const morePosts = published.slice(1, 5);
 const projects = await getProjects();
 ---
 <BaseLayout title="Home" description="Notes on AI and software, and open-source projects.">
   <div class="stack-lg">
-    <section>
+    <section class="hero">
       <p class="identity">Solutions architect living the AI transition in software.</p>
+      <p class="hero-tagline">
+        Notes on AI, software craft, and the open-source tools I build along the way.
+      </p>
+      <div class="lede">
+        <p>
+          The industry is rewriting how software gets made. I write about what holds up under
+          real delivery pressure—honest takes on AI, engineering practice, and documentation
+          that both humans and agents can trust.
+        </p>
+        <p>
+          If you care about clarity over hype, you’re in the right place.
+        </p>
+      </div>
+      <p class="hero-ctas">
+        <a href="/blog/">Read the blog</a>
+        <span class="hero-ctas-sep" aria-hidden="true">·</span>
+        <a href="/projects/">Open source</a>
+      </p>
     </section>
 
     <section>
       <h2 class="section-title">Latest writing</h2>
-      <PostList posts={posts} />
-      <p class="meta" style="margin-top: 1rem;">
-        <a href="/blog/">All posts</a>
+      <p class="section-intro">On AI, engineering, and the tools that survive the hype.</p>
+      {featured ? (
+        <FeaturedPost post={featured} />
+      ) : (
+        <p class="meta">No posts yet.</p>
+      )}
+      {morePosts.length > 0 && (
+        <>
+          <h3 class="subsection-title">More posts</h3>
+          <PostList posts={morePosts} />
+        </>
+      )}
+      <p class="section-footer-link">
+        <a href="/blog/">All posts →</a>
       </p>
     </section>
 
     <section>
       <h2 class="section-title">Open source</h2>
-      <div>
+      <p class="section-intro">Things I maintain and still use myself.</p>
+      <div class="project-list">
         {projects.map((project) => (
           <ProjectCard project={project} />
         ))}
       </div>
+      {projects.length > 0 && (
+        <p class="section-footer-link">
+          <a href="/projects/">All projects →</a>
+        </p>
+      )}
     </section>
   </div>
 </BaseLayout>

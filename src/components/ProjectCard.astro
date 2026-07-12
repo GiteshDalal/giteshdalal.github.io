@@ -6,8 +6,16 @@ interface Props {
 }
 
 const { project } = Astro.props;
+const href = `/projects/${project.id}/`;
 ---
-<a class="project-card" href={`/projects/${project.id}/`}>
-  <h3 class="project-card-title">{project.data.title}</h3>
+<article class="project-card">
+  <p class="project-card-eyebrow">Open source</p>
+  <h3 class="project-card-title">
+    <a href={href}>{project.data.title}</a>
+  </h3>
   <p class="project-card-tagline">{project.data.tagline}</p>
-</a>
+  <p class="project-card-actions">
+    <a href={href}>View project →</a>
+    <a href={project.data.github} rel="noopener noreferrer">GitHub →</a>
+  </p>
+</article>

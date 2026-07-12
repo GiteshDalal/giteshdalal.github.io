@@ -55,7 +55,14 @@ const fullTitle = title === 'Home' ? 'Gitesh Dalal' : `${title} · Gitesh Dalal`
       <slot />
     </main>
     <footer class="site-footer">
-      <p>© {new Date().getFullYear()} Gitesh Dalal</p>
+      <p class="site-footer-lead">
+        New posts via <a href="/rss.xml">RSS</a> — subscribe in your reader for future updates.
+      </p>
+      <p class="site-footer-meta">
+        <a href="https://github.com/GiteshDalal" rel="noopener noreferrer">GitHub</a>
+        <span class="hero-ctas-sep" aria-hidden="true">·</span>
+        <span>© {new Date().getFullYear()} Gitesh Dalal</span>
+      </p>
     </footer>
   </body>
 </html>
