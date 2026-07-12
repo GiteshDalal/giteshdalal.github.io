@@ -1,0 +1,106 @@
+---
+---
+<button
+  type="button"
+  class="theme-toggle"
+  id="theme-toggle"
+  aria-label="Toggle color theme"
+  title="Toggle color theme"
+>
+  <span class="theme-toggle-icon theme-toggle-icon--to-dark" aria-hidden="true">☾</span>
+  <span class="theme-toggle-icon theme-toggle-icon--to-light" aria-hidden="true">☀</span>
+</button>
+
+<script is:inline>
+  (function () {
+    var storageKey = 'theme';
+    var root = document.documentElement;
+    var button = document.getElementById('theme-toggle');
+
+    function systemTheme() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    function currentTheme() {
+      var attr = root.getAttribute('data-theme');
+      if (attr === 'light' || attr === 'dark') return attr;
+      return systemTheme();
+    }
+
+    function applyTheme(theme) {
+      root.setAttribute('data-theme', theme);
+      if (button) {
+        var next = theme === 'dark' ? 'light' : 'dark';
+        button.setAttribute(
+          'aria-label',
+          next === 'dark' ? 'Switch to dark theme' : 'Switch to light theme',
+        );
+        button.setAttribute('title', next === 'dark' ? 'Switch to dark theme' : 'Switch to light theme');
+      }
+    }
+
+    // Ensure attribute matches resolved theme if boot script missed this page
+    applyTheme(currentTheme());
+
+    if (button) {
+      button.addEventListener('click', function () {
+        var next = currentTheme() === 'dark' ? 'light' : 'dark';
+        try {
+          localStorage.setItem(storageKey, next);
+        } catch (_) {}
+        applyTheme(next);
+      });
+    }
+  })();
+</script>
+
+<style>
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    margin: 0;
+    padding: 0;
+    border: 1px solid var(--border);
+    border-radius: 0.35rem;
+    background: transparent;
+    color: var(--fg);
+    font-size: 1.05rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .theme-toggle:hover {
+    border-color: var(--link);
+    color: var(--link);
+  }
+
+  .theme-toggle:focus-visible {
+    outline: 2px solid var(--link);
+    outline-offset: 2px;
+  }
+
+  .theme-toggle-icon {
+    display: none;
+  }
+
+  :global([data-theme='light']) .theme-toggle-icon--to-dark,
+  :global(:root:not([data-theme])) .theme-toggle-icon--to-dark {
+    display: inline;
+  }
+
+  :global([data-theme='dark']) .theme-toggle-icon--to-light {
+    display: inline;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme])) .theme-toggle-icon--to-dark {
+      display: none;
+    }
+    :global(:root:not([data-theme])) .theme-toggle-icon--to-light {
+      display: inline;
+    }
+  }
+</style>

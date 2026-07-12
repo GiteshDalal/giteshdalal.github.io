@@ -1,5 +1,5 @@
 ---
-title: "FDF"
+title: "FDF - Feature Document Format"
 tagline: "Documentation-as-a-directory for software features"
 github: "https://github.com/GiteshDalal/fdf"
 order: 1

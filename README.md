@@ -27,7 +27,7 @@ bun install
 | `bun run build` | Production build into `dist/` |
 | `bun run preview` | Serve the production build locally |
 
-Theme (light/dark) follows **system preference** — no in-site toggle.
+Theme (light/dark) follows **system preference** on first visit. Use the **sun/moon button** in the header to toggle; your choice is stored in `localStorage` under the key `theme`.
 
 ## Site map
 

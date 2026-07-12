@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import ThemeToggle from '../components/ThemeToggle.astro';
 
 interface Props {
   title: string;
@@ -18,16 +19,39 @@ const fullTitle = title === 'Home' ? 'Gitesh Dalal' : `${title} · Gitesh Dalal`
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="alternate" type="application/rss+xml" title="Gitesh Dalal" href="/rss.xml" />
     <title>{fullTitle}</title>
+    <!-- Apply saved or system theme before paint to avoid a flash -->
+    <script is:inline>
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          var theme =
+            stored === 'light' || stored === 'dark'
+              ? stored
+              : window.matchMedia('(prefers-color-scheme: dark)').matches
+                ? 'dark'
+                : 'light';
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (_) {
+          document.documentElement.setAttribute(
+            'data-theme',
+            window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
+          );
+        }
+      })();
+    </script>
   </head>
   <body>
     <header class="site-header">
       <a href="/" class="site-wordmark">Gitesh Dalal</a>
-      <nav class="site-nav" aria-label="Primary">
-        <a href="/">Home</a>
-        <a href="/blog/">Blog</a>
-        <a href="/projects/">Projects</a>
-        <a href="/rss.xml">Subscribe</a>
-      </nav>
+      <div class="site-header-actions">
+        <nav class="site-nav" aria-label="Primary">
+          <a href="/">Home</a>
+          <a href="/blog/">Blog</a>
+          <a href="/projects/">Projects</a>
+          <a href="/rss.xml">Subscribe</a>
+        </nav>
+        <ThemeToggle />
+      </div>
     </header>
     <main class="site-main">
       <slot />
@@ -46,5 +70,11 @@ const fullTitle = title === 'Home' ? 'Gitesh Dalal' : `${title} · Gitesh Dalal`
   }
   .site-wordmark:hover {
     color: var(--link);
+  }
+  .site-header-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
   }
 </style>
