@@ -28,9 +28,9 @@ It wasn't perfect, but it was vastly faster than the old way of troubleshooting.
 
 ## Phase 2: The Coding Catalyst & The Go E-Commerce Project
 
-By 2024, I decided to take the plunge into dedicated AI code assistants. At the time, the landscape was shifting; GitHub Copilot wasn't quite hitting the mark for me, leaving two main choices: Cursor and Codium.
+By 2024, I decided to take the plunge into dedicated AI code assistants. At the time, the landscape was shifting; GitHub Copilot wasn't quite hitting the mark for me, leaving two main choices: Cursor and Codeium.
 
-I chose Codium because it offered a highly generous free auto-complete tier, and I wasn't ready to commit to a paid subscription for an unproven tool. It turned out to be an incredible choice. I was writing code across a diverse stack — primarily Go and Dart (for Flutter applications), alongside Java, Kotlin, and occasional Groovy scripts for work.
+I chose Codeium because it offered a highly generous free auto-complete tier, and I wasn't ready to commit to a paid subscription for an unproven tool. It turned out to be an incredible choice. I was writing code across a diverse stack — primarily Go and Dart (for Flutter applications), alongside Java, Kotlin, and occasional Groovy scripts for work.
 
 ```
 My AI Development Stack (2024)
@@ -40,7 +40,7 @@ My AI Development Stack (2024)
 
 The real test came when I applied it to a personal project: building a heavy Go-based e-commerce platform. Most enterprise platforms are built on Java, making them costly to run. Leveraging my e-commerce background, I wanted to build something highly efficient and cheap to operate using Go.
 
-With Codium's autocomplete, I wrote all the core modules — pricing, catalog, checkout, and inventory — within just one and a half months. While its early step-planning multi-file features (which was renamed to Windsurf and later Devin AI) felt clunky and required frequent rejections, the localized multi-place editing capabilities completely changed my development velocity. It remained my primary editor for nearly a year.
+With Codeium's autocomplete, I wrote all the core modules — pricing, catalog, checkout, and inventory — within just one and a half months. While its early step-planning multi-file features (a lineage that was renamed to Windsurf and later became Devin Desktop) felt clunky and required frequent rejections, the localized multi-place editing capabilities completely changed my development velocity. It remained my primary editor for nearly a year.
 
 ---
 
@@ -55,7 +55,7 @@ Instead of treating the AI as a singular chatbot, I architected a system of spec
 - **The Storyliner/Architect:** Powered by Claude Opus to break down the overarching plot.
 - **The Writer:** Responsible for drafting scenes based on structured prompts.
 - **The Editor & Reviewer:** Tasked with thematic consistency and structural flow.
-- **The Critique & Grammar Fixer:** A dedicated Haiku/Sonnet agent that reviewed text line-by-line for grammatical mechanical precision.
+- **The Critique & Grammar Fixer:** A dedicated Haiku/Sonnet agent that reviewed text line-by-line for grammatical and mechanical precision.
 
 ### The Software Engineering Approach to Literature
 
@@ -107,7 +107,7 @@ This separation was the real unlock. When "good writing" is an undefined vibe, t
 
 While the agent architecture allowed me to complete the novel, it exposed the structural boundaries of large language models: it was an absolute token hog. As the project scaled, I hit a massive wall: **Context Rot**.
 
-At that stage, context windows were capped around 256k. The foundational world-building documents and character sheets consumed nearly half of that window before a single word of the new chapter was even generated. The model began losing focus, hallucinating completed tasks, and suffering from severe drift.
+At that stage, context windows were capped at 200k tokens. The foundational world-building documents and character sheets consumed nearly half of that window before a single word of the new chapter was even generated. The model began losing focus, hallucinating completed tasks, and suffering from severe drift.
 
 > **Example:** A gritty pirate character would suddenly stop using maritime slang mid-scene and begin speaking in pristine, formal British English because the model lost track of its character trait context.
 
@@ -131,7 +131,7 @@ My workflow underwent a major paradigm shift:
 | --- | --- |
 | Sitting in front of the IDE approving every line edit. | Utilizing highly detailed Plans and architecture briefs. |
 | Chatting continuously in a single, bloated window. | Spawning localized, short-lived sub-agents for specific implementation tasks. |
-| Manually tracking cross-file code references. | Executing terminal commands via dangerously skip permissions and reviewing the final PR. |
+| Manually tracking cross-file code references. | Executing terminal commands via `--dangerously-skip-permissions` and reviewing the final PR. |
 
 By utilizing sub-agents, I completely solved the coding context rot problem. Instead of forcing one massive chat session to implement a whole system — which causes the model to lose focus and hallucinate progress — a master plan spawns tiny, context-insulated sub-agents to do one job, report back, and die.
 
@@ -147,7 +147,7 @@ Taking inspiration from this, I developed and open-sourced my own highly opinion
 
 ---
 
-## Phase 6: The Current 2026 AI Landscape Evaluated
+## Phase 6: Evaluating the 2026 AI Landscape
 
 Today, the tooling ecosystem is radically different, and I select models based entirely on the task's cognitive requirements rather than brand loyalty.
 
@@ -162,7 +162,7 @@ Today, the tooling ecosystem is radically different, and I select models based e
 │ Deep Architecture│    │ Agentic Coding  │     │ Blazing Fast    │
 │   & Planning     │    │ & Open Sub Key  │     │ Iteration       │
 ├──────────────────┤    ├─────────────────┤     ├─────────────────┤
-│ Model: Fable/Opus│    │  Model:GPT-5.6  │     │ Model: Grok 4.5 │
+│ Model: Fable/Opus│    │ Model: GPT-5.6  │     │ Model: Grok 4.5 │
 └──────────────────┘    └─────────────────┘     └─────────────────┘
 ```
 
@@ -176,13 +176,13 @@ For deep cloud architecture, system design, and security vulnerability scanning,
 >
 > My overarching goal for this project has evolved: I want to aggressively minimize infrastructure costs to a near-zero floor. Current corporate e-commerce offerings are incredibly expensive for small-to-medium operations. By migrating the codebase to Rust, I am driving the operational footprint down so low that I can eventually offer this platform completely free for small businesses, while providing an incredibly cheap, high-throughput solution for medium businesses and massive enterprises alike. Fable meticulously handled the complex system translation, optimizing the architecture to confidently serve millions of requests on a shoe-string budget.
 
-### 2. OpenAI GPT Codex: The Playground for Engineers
+### 2. OpenAI GPT-5.6: The Playground for Engineers
 
-If you want to escape ecosystem lock-in, Open AI plans are the current gold standard. Anthropic has increasingly locked down Claude Code, preventing developers from using their Subscriptions keys in third-party development harnesses. Open AI allows total freedom. You can plug in your subscription API key into custom orchestration rigs like Hermes, Pi, or OpenCode. If you practice strict spec-driven development instead of vibe coding, GPT-5.6 models inside a customized harness delivers pristine production results.
+If you want to escape ecosystem lock-in, OpenAI plans are the current gold standard. Anthropic has increasingly locked down Claude Code, preventing developers from using their subscription logins in third-party development harnesses. OpenAI allows total freedom. You can plug your subscription into custom orchestration rigs like Hermes, Pi, or OpenCode. If you practice strict spec-driven development instead of vibe coding, GPT-5.6 models inside a customized harness deliver pristine production results.
 
 ### 3. Grok 4.5: The Speed Daemon
 
-Grok 4.5 has become an absolute favorite of mine for daily iteration. I was hooked on day one becuase of its fast speed, and fast is not behind a paywall - its just fast by default. While its raw cognitive capacity sits closer to Sonnet-level performance rather than the heavy-lifting tiers of Fable or GPT 5.6, it is blazingly fast and highly cost-effective. Thanks to spec driven Agentic Engineering skills, a highly responsive model like Grok 4.5 can comfortably achieve elite production outputs without needing the most expensive reasoning models for every single line of code.
+Grok 4.5 has become an absolute favorite of mine for daily iteration. I was hooked on day one because of its sheer speed — and fast is not behind a paywall, it's just fast by default. While its raw cognitive capacity sits closer to Sonnet-level performance rather than the heavy-lifting tiers of Fable or GPT-5.6, it is blazingly fast and highly cost-effective. Thanks to spec-driven agentic engineering skills, a highly responsive model like Grok 4.5 can comfortably achieve elite production outputs without needing the most expensive reasoning models for every single line of code.
 
 ---
 
