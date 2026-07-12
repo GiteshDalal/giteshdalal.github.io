@@ -14,7 +14,7 @@ Here is the unfiltered story of my journey through the AI boom — the breakthro
 
 ## Phase 1: The Gateway Drug (Replacing Stack Overflow)
 
-Before I fully integrated AI into my development ecosystem, my initial interaction with models like ChatGPT and Gemini was simple: a Stack Overflow replacement.
+Before I fully integrated AI into my development ecosystem, my initial interaction with models like [ChatGPT](https://chatgpt.com) and [Gemini](https://gemini.google.com) was simple: a [Stack Overflow](https://stackoverflow.com) replacement.
 
 Instead of copy-pasting an obscure error message into a Google search and scrolling through endless, snarky forum threads, I started dumping my application errors straight into the chat prompt.
 
@@ -28,7 +28,7 @@ It wasn't perfect, but it was vastly faster than the old way of troubleshooting.
 
 ## Phase 2: The Coding Catalyst & The Go E-Commerce Project
 
-By 2024, I decided to take the plunge into dedicated AI code assistants. At the time, the landscape was shifting; GitHub Copilot wasn't quite hitting the mark for me, leaving two main choices: Cursor and Codeium.
+By 2024, I decided to take the plunge into dedicated AI code assistants. At the time, the landscape was shifting; [GitHub Copilot](https://github.com/features/copilot) wasn't quite hitting the mark for me, leaving two main choices: [Cursor](https://cursor.com) and [Codeium](https://windsurf.com).
 
 I chose Codeium because it offered a highly generous free auto-complete tier, and I wasn't ready to commit to a paid subscription for an unproven tool. It turned out to be an incredible choice. I was writing code across a diverse stack — primarily Go and Dart (for Flutter applications), alongside Java, Kotlin, and occasional Groovy scripts for work.
 
@@ -40,22 +40,22 @@ My AI Development Stack (2024)
 
 The real test came when I applied it to a personal project: building a heavy Go-based e-commerce platform. Most enterprise platforms are built on Java, making them costly to run. Leveraging my e-commerce background, I wanted to build something highly efficient and cheap to operate using Go.
 
-With Codeium's autocomplete, I wrote all the core modules — pricing, catalog, checkout, and inventory — within just one and a half months. While its early step-planning multi-file features (a lineage that was renamed to Windsurf and later became Devin Desktop) felt clunky and required frequent rejections, the localized multi-place editing capabilities completely changed my development velocity. It remained my primary editor for nearly a year.
+With Codeium's autocomplete, I wrote all the core modules — pricing, catalog, checkout, and inventory — within just one and a half months. While its early step-planning multi-file features (a lineage that was renamed to [Windsurf](https://windsurf.com) and later became [Devin Desktop](https://devin.ai)) felt clunky and required frequent rejections, the localized multi-place editing capabilities completely changed my development velocity. It remained my primary editor for nearly a year.
 
 ---
 
 ## Phase 3: The Creative Leap (Writing a Novel with Claude Code)
 
-Eventually, I migrated to Claude Code, keeping a premium, maximum-usage subscription for 13 months because I was burning through tokens exploring its boundaries. I jumped in before features like "skills" or "commands" existed, back when agentic workflows were just surfacing.
+Eventually, I migrated to [Claude Code](https://claude.com/product/claude-code), keeping a premium, maximum-usage subscription for 13 months because I was burning through tokens exploring its boundaries. I jumped in before features like "skills" or "commands" existed, back when agentic workflows were just surfacing.
 
 To push the tool beyond code, I undertook a massive hobby project: writing a complete high-fantasy novel.
 
 Instead of treating the AI as a singular chatbot, I architected a system of specialized markdown (.md) agents embedded directly inside a GitHub repository. Each agent had a distinct persona and goal:
 
-- **The Storyliner/Architect:** Powered by Claude Opus to break down the overarching plot.
+- **The Storyliner/Architect:** Powered by [Claude Opus](https://www.anthropic.com/claude/opus) to break down the overarching plot.
 - **The Writer:** Responsible for drafting scenes based on structured prompts.
 - **The Editor & Reviewer:** Tasked with thematic consistency and structural flow.
-- **The Critique & Grammar Fixer:** A dedicated Haiku/Sonnet agent that reviewed text line-by-line for grammatical and mechanical precision.
+- **The Critique & Grammar Fixer:** A dedicated [Haiku](https://www.anthropic.com/claude/haiku)/[Sonnet](https://www.anthropic.com/claude/sonnet) agent that reviewed text line-by-line for grammatical and mechanical precision.
 
 ### The Software Engineering Approach to Literature
 
@@ -97,9 +97,9 @@ So I built a `writing_guidelines/` directory in the repo, and every agent was re
   directly ("he felt angry") is flagged for rewrite.
 ```
 
-The Critique agent effectively became my prose linter — it didn't judge whether the writing was *good*, it validated the text against these concrete rules and returned violations, line by line, the same way `golangci-lint` returns findings against a Go file. Subjective quality judgments were left to the Editor agent, working from its own separate guideline set covering pacing and thematic consistency.
+The Critique agent effectively became my prose linter — it didn't judge whether the writing was *good*, it validated the text against these concrete rules and returned violations, line by line, the same way [`golangci-lint`](https://golangci-lint.run) returns findings against a Go file. Subjective quality judgments were left to the Editor agent, working from its own separate guideline set covering pacing and thematic consistency.
 
-This separation was the real unlock. When "good writing" is an undefined vibe, the model flails. When it's a specification document, the model executes. It was spec-driven development for fiction — a year before I formalized the same instinct into FDF.
+This separation was the real unlock. When "good writing" is an undefined vibe, the model flails. When it's a specification document, the model executes. It was spec-driven development for fiction — a year before I formalized the same instinct into [FDF](/projects/fdf/).
 
 ---
 
@@ -115,9 +115,9 @@ At that stage, context windows were capped at 200k tokens. The foundational worl
 
 1. **Shrinking Chapter Lengths:** I discovered the absolute sweet spot for high-quality AI literary generation is 1,000 to 1,500 words per chapter. Attempting longer outputs caused the reviews to divert and the narrative to fall apart.
 2. **Aggressive Multi-Review Loops:** I instituted automated workflows where chapters underwent 3 to 5 continuous multi-agent revision loops before being committed.
-3. **The Auditory Quality Check:** Once committed to Git, I opened the chapter in Microsoft Edge and used the Read Aloud feature to listen to the prose, manually correcting jarring transitions or unnatural dialogue flows.
+3. **The Auditory Quality Check:** Once committed to Git, I opened the chapter in [Microsoft Edge](https://www.microsoft.com/edge) and used the Read Aloud feature to listen to the prose, manually correcting jarring transitions or unnatural dialogue flows.
 
-I ultimately published the short novel on Royal Road. While it was a brilliant technical success for me, the audience reception highlighted a cultural hurdle: the community heavily avoids works flagged with AI assistance, quickly dismissing them as "AI slop" regardless of how much human structural engineering went into the plot.
+I ultimately published the short novel on [Royal Road](https://www.royalroad.com). While it was a brilliant technical success for me, the audience reception highlighted a cultural hurdle: the community heavily avoids works flagged with AI assistance, quickly dismissing them as "AI slop" regardless of how much human structural engineering went into the plot.
 
 ---
 
@@ -137,13 +137,13 @@ By utilizing sub-agents, I completely solved the coding context rot problem. Ins
 
 ### Ditching MCP for Lean Local Tooling
 
-When the Model Context Protocol (MCP) exploded in popularity, I experimented with it heavily. However, I found that complex MCP integrations (like full GitHub MCP servers) bloated the context window unnecessarily with background noise. Because I prefer keeping my context windows exceptionally lean, I dropped general MCPs and switched to executing raw, highly targeted terminal commands, such as using the GitHub CLI (`gh`) directly inside the agent terminal.
+When the [Model Context Protocol (MCP)](https://modelcontextprotocol.io) exploded in popularity, I experimented with it heavily. However, I found that complex MCP integrations (like full GitHub MCP servers) bloated the context window unnecessarily with background noise. Because I prefer keeping my context windows exceptionally lean, I dropped general MCPs and switched to executing raw, highly targeted terminal commands, such as using the [GitHub CLI (`gh`)](https://cli.github.com) directly inside the agent terminal.
 
 ### Open Knowledge Format (OKF) & Creating FDF
 
-Managing design documentation across massive codebases remained a challenge. I studied Google's Open Knowledge Format (OKF), which champions organizing project knowledge bases via `.md` files equipped with YAML front matter so agents can quickly scan attributes without reading entire directories.
+Managing design documentation across massive codebases remained a challenge. I studied Google's [Open Knowledge Format (OKF)](https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing/), which champions organizing project knowledge bases via `.md` files equipped with YAML front matter so agents can quickly scan attributes without reading entire directories.
 
-Taking inspiration from this, I developed and open-sourced my own highly opinionated framework: **FDF (Feature Document Format)**. Available on GitHub with an accompanying validation CLI tool, FDF enforces strict spec-driven development. It ensures your AI agents treat software engineering like a real-world engineering team would — validating features against concrete specification documents rather than guessing intent.
+Taking inspiration from this, I developed and open-sourced my own highly opinionated framework: **FDF (Feature Document Format)**. Available on [GitHub](https://github.com/GiteshDalal/fdf) with an accompanying validation CLI tool, FDF enforces strict spec-driven development. It ensures your AI agents treat software engineering like a real-world engineering team would — validating features against concrete specification documents rather than guessing intent.
 
 ---
 
@@ -168,7 +168,7 @@ Today, the tooling ecosystem is radically different, and I select models based e
 
 ### 1. Fable: The Master Architect
 
-For deep cloud architecture, system design, and security vulnerability scanning, Fable is completely unmatched. As a Solutions Architect, I am naturally skeptical of automated system designs, yet I rarely find myself disagreeing with its output. It is slow and deliberate, but its multi-angle planning is so sound that I no longer open Figma or architectural charting tools manually; I let Fable design the infrastructure layout.
+For deep cloud architecture, system design, and security vulnerability scanning, [Fable](https://www.anthropic.com/news/claude-fable-5-mythos-5) is completely unmatched. As a Solutions Architect, I am naturally skeptical of automated system designs, yet I rarely find myself disagreeing with its output. It is slow and deliberate, but its multi-angle planning is so sound that I no longer open [Figma](https://www.figma.com) or architectural charting tools manually; I let Fable design the infrastructure layout.
 
 > 💡 **Case Study: The Hyper-Cheap Go-to-Rust Migration**
 >
@@ -178,11 +178,11 @@ For deep cloud architecture, system design, and security vulnerability scanning,
 
 ### 2. OpenAI GPT-5.6: The Playground for Engineers
 
-If you want to escape ecosystem lock-in, OpenAI plans are the current gold standard. Anthropic has increasingly locked down Claude Code, preventing developers from using their subscription logins in third-party development harnesses. OpenAI allows total freedom. You can plug your subscription into custom orchestration rigs like Hermes, Pi, or OpenCode. If you practice strict spec-driven development instead of vibe coding, GPT-5.6 models inside a customized harness deliver pristine production results.
+If you want to escape ecosystem lock-in, OpenAI plans are the current gold standard. Anthropic has [increasingly locked down Claude Code](https://www.theregister.com/2026/02/20/anthropic_clarifies_ban_third_party_claude_access/), preventing developers from using their subscription logins in third-party development harnesses. OpenAI allows total freedom. You can plug your subscription into custom orchestration rigs like [Hermes](https://github.com/NousResearch/hermes-agent), [Pi](https://pi.dev), or [OpenCode](https://opencode.ai). If you practice strict spec-driven development instead of vibe coding, [GPT-5.6](https://openai.com/index/previewing-gpt-5-6-sol/) models inside a customized harness deliver pristine production results.
 
 ### 3. Grok 4.5: The Speed Daemon
 
-Grok 4.5 has become an absolute favorite of mine for daily iteration. I was hooked on day one because of its sheer speed — and fast is not behind a paywall, it's just fast by default. While its raw cognitive capacity sits closer to Sonnet-level performance rather than the heavy-lifting tiers of Fable or GPT-5.6, it is blazingly fast and highly cost-effective. Thanks to spec-driven agentic engineering skills, a highly responsive model like Grok 4.5 can comfortably achieve elite production outputs without needing the most expensive reasoning models for every single line of code.
+[Grok 4.5](https://x.ai/news/grok-4-5) has become an absolute favorite of mine for daily iteration. I was hooked on day one because of its sheer speed — and fast is not behind a paywall, it's just fast by default. While its raw cognitive capacity sits closer to Sonnet-level performance rather than the heavy-lifting tiers of Fable or GPT-5.6, it is blazingly fast and highly cost-effective. Thanks to spec-driven agentic engineering skills, a highly responsive model like Grok 4.5 can comfortably achieve elite production outputs without needing the most expensive reasoning models for every single line of code.
 
 ---
 
