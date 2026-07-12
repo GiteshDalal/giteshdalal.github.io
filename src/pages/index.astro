@@ -1,6 +1,33 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PostList from '../components/PostList.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { getPublishedPosts, getProjects } from '../lib/content';
+
+const posts = (await getPublishedPosts()).slice(0, 5);
+const projects = await getProjects();
 ---
-<BaseLayout title="Home">
-  <p class="identity">Solutions architect living the AI transition in software.</p>
+<BaseLayout title="Home" description="Notes on AI and software, and open-source projects.">
+  <div class="stack-lg">
+    <section>
+      <p class="identity">Solutions architect living the AI transition in software.</p>
+    </section>
+
+    <section>
+      <h2 class="section-title">Latest writing</h2>
+      <PostList posts={posts} />
+      <p class="meta" style="margin-top: 1rem;">
+        <a href="/blog/">All posts</a>
+      </p>
+    </section>
+
+    <section>
+      <h2 class="section-title">Open source</h2>
+      <div>
+        {projects.map((project) => (
+          <ProjectCard project={project} />
+        ))}
+      </div>
+    </section>
+  </div>
 </BaseLayout>
