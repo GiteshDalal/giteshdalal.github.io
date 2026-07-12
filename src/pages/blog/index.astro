@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostList from '../../components/PostList.astro';
+import RssLink from '../../components/RssLink.astro';
+import { getPublishedPosts } from '../../lib/content';
+
+const posts = await getPublishedPosts();
+---
+<BaseLayout title="Blog" description="Notes on AI and software.">
+  <div class="stack">
+    <div>
+      <h1 class="page-title">Blog</h1>
+      <p class="meta">Takes on AI and software. <RssLink /></p>
+    </div>
+    <PostList posts={posts} />
+  </div>
+</BaseLayout>
