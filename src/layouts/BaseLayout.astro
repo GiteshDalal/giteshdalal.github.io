@@ -43,15 +43,13 @@ const fullTitle = title === 'Home' ? 'Gitesh Dalal' : `${title} · Gitesh Dalal`
   <body>
     <header class="site-header">
       <a href="/" class="site-wordmark">Gitesh Dalal</a>
-      <div class="site-header-actions">
-        <nav class="site-nav" aria-label="Primary">
-          <a href="/">Home</a>
-          <a href="/blog/">Blog</a>
-          <a href="/projects/">Projects</a>
-          <a href="/rss.xml">Subscribe</a>
-        </nav>
+      <nav class="site-nav" aria-label="Primary">
         <ThemeToggle />
-      </div>
+        <a href="/">Home</a>
+        <a href="/blog/">Blog</a>
+        <a href="/projects/">Projects</a>
+        <a href="/rss.xml">Subscribe</a>
+      </nav>
     </header>
     <main class="site-main">
       <slot />
@@ -70,11 +68,5 @@ const fullTitle = title === 'Home' ? 'Gitesh Dalal' : `${title} · Gitesh Dalal`
   }
   .site-wordmark:hover {
     color: var(--link);
-  }
-  .site-header-actions {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 1rem;
   }
 </style>
