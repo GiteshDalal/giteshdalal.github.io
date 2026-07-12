@@ -1,0 +1,50 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Notes on AI and software, and open-source projects.' } = Astro.props;
+const fullTitle = title === 'Home' ? 'Gitesh Dalal' : `${title} · Gitesh Dalal`;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate" type="application/rss+xml" title="Gitesh Dalal" href="/rss.xml" />
+    <title>{fullTitle}</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <a href="/" class="site-wordmark">Gitesh Dalal</a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/blog/">Blog</a>
+        <a href="/projects/">Projects</a>
+        <a href="/rss.xml">Subscribe</a>
+      </nav>
+    </header>
+    <main class="site-main">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <p>© {new Date().getFullYear()} Gitesh Dalal</p>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .site-wordmark {
+    font-weight: 600;
+    color: var(--fg);
+    text-decoration: none;
+  }
+  .site-wordmark:hover {
+    color: var(--link);
+  }
+</style>

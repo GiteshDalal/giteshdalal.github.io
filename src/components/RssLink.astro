@@ -1,0 +1,14 @@
+---
+interface Props {
+  label?: string;
+}
+const { label = 'Subscribe (RSS)' } = Astro.props;
+---
+<a class="rss-link" href="/rss.xml">{label}</a>
+
+<style>
+  .rss-link {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+  }
+</style>
