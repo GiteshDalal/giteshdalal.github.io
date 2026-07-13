@@ -2,7 +2,7 @@
 
 Personal site: thin identity, a Markdown blog, and one page per open-source project. Built with **Astro** (static), managed with **Bun**, hosted on **GitHub Pages**.
 
-Live URL: [https://giteshdalal.github.io](https://giteshdalal.github.io)
+Live URL: [https://giteshdalal.com](https://giteshdalal.com) (GitHub Pages; repo still `giteshdalal.github.io`)
 
 ## Prerequisites
 
@@ -132,7 +132,7 @@ Deploy is automatic from **`main`** via GitHub Actions (`.github/workflows/deplo
 
 Site config uses:
 
-- `site: https://giteshdalal.github.io` (`astro.config.mjs`)
+- `site: https://giteshdalal.com` (`astro.config.mjs`); custom domain via `public/CNAME`
 - Static output, base path `/`
 
 ## Layout of the repo (content-focused)

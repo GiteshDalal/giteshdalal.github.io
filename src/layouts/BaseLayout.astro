@@ -7,10 +7,67 @@ import ThemeToggle from '../components/ThemeToggle.astro';
 interface Props {
   title: string;
   description?: string;
+  /** Open Graph type — use `article` for blog posts */
+  type?: 'website' | 'article';
+  pubDate?: Date;
+  /** Absolute or site-root path for social share image */
+  image?: string;
+  /** Extra JSON-LD object(s) merged into the page graph */
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
-const { title, description = 'Notes on AI and software, and open-source projects.' } = Astro.props;
-const fullTitle = title === 'Home' ? 'Gitesh Dalal' : `${title} · Gitesh Dalal`;
+const SITE_NAME = 'Gitesh Dalal';
+const DEFAULT_DESCRIPTION = 'Notes on AI and software, and open-source projects.';
+const DEFAULT_OG_IMAGE = '/og-default.jpg';
+
+const {
+  title,
+  description = DEFAULT_DESCRIPTION,
+  type = 'website',
+  pubDate,
+  image = DEFAULT_OG_IMAGE,
+  jsonLd,
+} = Astro.props;
+
+const fullTitle = title === 'Home' ? SITE_NAME : `${title} · ${SITE_NAME}`;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const imageURL = new URL(image, Astro.site).href;
+const siteURL = Astro.site?.href ?? 'https://giteshdalal.com/';
+
+const personId = `${siteURL}#person`;
+const websiteId = `${siteURL}#website`;
+
+const baseJsonLd: Record<string, unknown>[] = [
+  {
+    '@type': 'WebSite',
+    '@id': websiteId,
+    name: SITE_NAME,
+    url: siteURL,
+    description: DEFAULT_DESCRIPTION,
+    author: { '@id': personId },
+  },
+  {
+    '@type': 'Person',
+    '@id': personId,
+    name: SITE_NAME,
+    url: siteURL,
+    sameAs: [
+      'https://github.com/GiteshDalal',
+      'https://www.linkedin.com/in/giteshdalal',
+    ],
+  },
+];
+
+const extraJsonLd = jsonLd
+  ? Array.isArray(jsonLd)
+    ? jsonLd
+    : [jsonLd]
+  : [];
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [...baseJsonLd, ...extraJsonLd],
+};
 ---
 <!doctype html>
 <html lang="en">
@@ -18,9 +75,35 @@ const fullTitle = title === 'Home' ? 'Gitesh Dalal' : `${title} · Gitesh Dalal`
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <meta name="author" content={SITE_NAME} />
+    <link rel="canonical" href={canonicalURL} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="alternate" type="application/rss+xml" title="Gitesh Dalal" href="/rss.xml" />
+    <link rel="alternate" type="application/rss+xml" title={SITE_NAME} href="/rss.xml" />
     <title>{fullTitle}</title>
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={type} />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={imageURL} />
+    <meta property="og:image:alt" content={`${SITE_NAME} — ${description}`} />
+    {type === 'article' && pubDate && (
+      <meta property="article:published_time" content={pubDate.toISOString()} />
+    )}
+    {type === 'article' && (
+      <meta property="article:author" content={SITE_NAME} />
+    )}
+
+    <!-- Twitter / X Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageURL} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+
     <!-- Apply saved or system theme before paint to avoid a flash -->
     <script is:inline>
       (function () {
@@ -70,5 +153,3 @@ const fullTitle = title === 'Home' ? 'Gitesh Dalal' : `${title} · Gitesh Dalal`
     </footer>
   </body>
 </html>
-
-

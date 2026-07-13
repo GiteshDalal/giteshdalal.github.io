@@ -14,8 +14,33 @@ const formatted = pubDate.toLocaleDateString('en-US', {
   month: 'long',
   day: 'numeric',
 });
+
+const siteURL = Astro.site?.href ?? 'https://giteshdalal.com/';
+const pageURL = new URL(Astro.url.pathname, Astro.site).href;
+
+const blogPosting = {
+  '@type': 'BlogPosting',
+  headline: title,
+  description,
+  datePublished: pubDate.toISOString(),
+  dateModified: pubDate.toISOString(),
+  author: { '@id': `${siteURL}#person` },
+  publisher: { '@id': `${siteURL}#person` },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': pageURL,
+  },
+  image: new URL('/og-default.jpg', Astro.site).href,
+  url: pageURL,
+};
 ---
-<BaseLayout title={title} description={description}>
+<BaseLayout
+  title={title}
+  description={description}
+  type="article"
+  pubDate={pubDate}
+  jsonLd={blogPosting}
+>
   <article class="stack">
     <header>
       <h1 class="page-title">{title}</h1>
