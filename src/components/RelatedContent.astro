@@ -1,0 +1,16 @@
+---
+interface Props {
+  eyebrow: string;
+  href: string;
+  title: string;
+  description: string;
+}
+
+const { eyebrow, href, title, description } = Astro.props;
+---
+<aside class="related-content" aria-labelledby="related-content-title">
+  <p class="related-content-eyebrow">{eyebrow}</p>
+  <h2 id="related-content-title"><a href={href}>{title}</a></h2>
+  <p>{description}</p>
+  <a class="related-content-action" href={href}>Continue reading →</a>
+</aside>

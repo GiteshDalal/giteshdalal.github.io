@@ -10,37 +10,39 @@ const featured = published[0];
 const morePosts = published.slice(1, 5);
 const projects = await getProjects();
 ---
-<BaseLayout title="Home" description="Notes on AI and software, and open-source projects.">
+<BaseLayout
+  title="Home"
+  description="Solution architecture, AI-assisted software delivery, and open-source tools that keep humans and agents aligned."
+  image="/og/home.png"
+>
   <div class="stack-lg">
     <section class="hero">
-      <p class="identity">Solution architect living the AI transition in software.</p>
+      <h1 class="hero-title">Solution architecture for AI-assisted delivery.</h1>
       <p class="hero-tagline">
-        Notes on AI, software craft, and the open-source tools I build along the way.
+        I write about durable software and build open-source tools that keep humans and agents aligned.
       </p>
       <div class="lede">
         <p>
-          Hi, I’m Gitesh. I design software systems for a living and spend my spare cycles
-          exploring how AI agents are rewriting the craft. I write about what holds up under
-          real delivery pressure—honest takes on AI, engineering practice, and documentation
-          that both humans and agents can trust.
-        </p>
-        <p>
-          Right now I’m keen on <a href="/projects/fdf/">FDF</a>, an open documentation format
-          that keeps agentic projects honest; a Rust rewrite of my Go e-commerce platform
-          chasing near-zero running costs; and multi-agent workflows for everything from
-          production backends to a published fantasy novel.
-        </p>
-        <p>
-          If you care about clarity over hype, you’re in the right place.
+          Hi, I’m Gitesh. I design software systems and document what holds up as AI agents
+          reshape engineering practice—from delivery workflows to the context they need to do
+          reliable work.
         </p>
       </div>
       <p class="hero-ctas">
         <a href="/blog/">Read the blog</a>
         <span class="hero-ctas-sep" aria-hidden="true">·</span>
-        <a href="/projects/">Open source</a>
+        <a href="/projects/fdf/">Explore FDF</a>
         <span class="hero-ctas-sep" aria-hidden="true">·</span>
-        <a href="https://www.linkedin.com/in/giteshdalal" rel="me">LinkedIn</a>
+        <a href="https://www.linkedin.com/in/giteshdalal" rel="me">Connect on LinkedIn</a>
       </p>
+      <div class="current-work">
+        <h2>Current work</h2>
+        <ul>
+          <li><strong>FDF</strong><span>A validated documentation format for agentic projects.</span></li>
+          <li><strong>Low-cost commerce rewrite</strong><span>Moving a Go platform to Rust toward near-zero running costs.</span></li>
+          <li><strong>Multi-agent workflows</strong><span>Exploring durable collaboration across software and creative work.</span></li>
+        </ul>
+      </div>
     </section>
 
     <section>

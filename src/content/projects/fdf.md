@@ -4,6 +4,27 @@ tagline: "Documentation-as-a-directory for software features"
 github: "https://github.com/GiteshDalal/fdf"
 order: 1
 status: "active"
+ogImage: "/og/fdf.png"
+relatedPost: "three-years-with-ai"
+overview:
+  audience: "Teams building long-lived software with AI agents."
+  problem: "Intent trapped in chat disappears, and documentation drifts away from the software."
+  capabilities:
+    - "Feature bundles keep specs, plans, acceptance tests, and tasks together."
+    - "Lifecycle status makes every feature's current state explicit."
+    - "Deterministic validation catches structural drift before it merges."
+  supports:
+    - "Claude Code"
+    - "Codex"
+    - "OpenCode"
+  install: "curl -fsSL https://raw.githubusercontent.com/GiteshDalal/fdf/main/install.sh | bash"
+  examplePath: "docs/features/payments/"
+  exampleFiles:
+    - "payments.spec.md"
+    - "payments.plan.md"
+    - "payments.test.md"
+    - "payments/"
+  validation: "fdf validate — bundle valid"
 ---
 
 **FDF** (Feature Document Format) is an open documentation format — plus an opinionated CLI that enforces it — for teams building software with AI agents. Every feature lives as Markdown + Gherkin in a validated `docs/features/` bundle: its design spec, implementation plan, acceptance tests, and tasks sit right beside it as stem-qualified siblings, and a status field tracks the feature from `draft` to `done`. The `fdf` CLI validates the whole bundle, so the documentation cannot silently drift away from reality.

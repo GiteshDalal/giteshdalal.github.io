@@ -7,6 +7,9 @@ const blog = defineCollection({
     title: z.string(),
     description: z.string(),
     pubDate: z.coerce.date(),
+    updatedDate: z.coerce.date().optional(),
+    ogImage: z.string().optional(),
+    relatedProject: z.string().optional(),
     draft: z.boolean().default(false),
   }),
 });
@@ -19,6 +22,20 @@ const projects = defineCollection({
     github: z.string().url(),
     order: z.number().default(0),
     status: z.enum(['active', 'archived']).default('active'),
+    ogImage: z.string().optional(),
+    relatedPost: z.string().optional(),
+    overview: z
+      .object({
+        audience: z.string(),
+        problem: z.string(),
+        capabilities: z.array(z.string()).length(3),
+        supports: z.array(z.string()).min(1),
+        install: z.string(),
+        examplePath: z.string(),
+        exampleFiles: z.array(z.string()).min(1),
+        validation: z.string(),
+      })
+      .optional(),
   }),
 });
 

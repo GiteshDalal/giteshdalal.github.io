@@ -14,3 +14,17 @@ export async function getProjects(): Promise<CollectionEntry<'projects'>[]> {
     return a.data.title.localeCompare(b.data.title);
   });
 }
+
+export async function getProjectById(
+  id: string,
+): Promise<CollectionEntry<'projects'> | undefined> {
+  const projects = await getCollection('projects');
+  return projects.find((project) => project.id === id);
+}
+
+export async function getPublishedPostById(
+  id: string,
+): Promise<CollectionEntry<'blog'> | undefined> {
+  const posts = await getCollection('blog', ({ data }) => data.draft !== true);
+  return posts.find((post) => post.id === id);
+}

@@ -5,12 +5,12 @@ import { getProjects } from '../../lib/content';
 
 const projects = await getProjects();
 ---
-<BaseLayout title="Projects" description="Open-source projects.">
+<BaseLayout title="Projects" description="Open-source projects." image="/og/projects.png">
   <div class="stack">
     <h1 class="page-title">Projects</h1>
     <div>
       {projects.map((project) => (
-        <ProjectCard project={project} />
+        <ProjectCard project={project} headingLevel="h2" />
       ))}
     </div>
   </div>
