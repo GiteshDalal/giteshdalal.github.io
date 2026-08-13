@@ -1,36 +1,63 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import RssLink from '../components/RssLink.astro';
+import RelatedContent from '../components/RelatedContent.astro';
+import TableOfContents from '../components/TableOfContents.astro';
+import type { MarkdownHeading } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+import { shouldShowTableOfContents } from '../lib/content-meta';
 
 interface Props {
   title: string;
   description: string;
   pubDate: Date;
+  updatedDate?: Date;
+  ogImage?: string;
+  headings: MarkdownHeading[];
+  readingMinutes: number;
+  relatedProject?: CollectionEntry<'projects'>;
 }
 
-const { title, description, pubDate } = Astro.props;
-const formatted = pubDate.toLocaleDateString('en-US', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-});
+const {
+  title,
+  description,
+  pubDate,
+  updatedDate,
+  ogImage,
+  headings,
+  readingMinutes,
+  relatedProject,
+} = Astro.props;
+
+function formatDate(date: Date): string {
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+
+const formatted = formatDate(pubDate);
+const formattedUpdated = updatedDate ? formatDate(updatedDate) : undefined;
+const showTableOfContents = shouldShowTableOfContents(readingMinutes, headings.length);
 
 const siteURL = Astro.site?.href ?? 'https://giteshdalal.com/';
 const pageURL = new URL(Astro.url.pathname, Astro.site).href;
+const resolvedImage = ogImage ?? '/og-default.jpg';
 
 const blogPosting = {
   '@type': 'BlogPosting',
   headline: title,
   description,
   datePublished: pubDate.toISOString(),
-  dateModified: pubDate.toISOString(),
+  ...(updatedDate ? { dateModified: updatedDate.toISOString() } : {}),
   author: { '@id': `${siteURL}#person` },
   publisher: { '@id': `${siteURL}#person` },
   mainEntityOfPage: {
     '@type': 'WebPage',
     '@id': pageURL,
   },
-  image: new URL('/og-default.jpg', Astro.site).href,
+  image: new URL(resolvedImage, Astro.site).href,
   url: pageURL,
 };
 ---
@@ -39,18 +66,33 @@ const blogPosting = {
   description={description}
   type="article"
   pubDate={pubDate}
+  updatedDate={updatedDate}
+  image={ogImage}
   jsonLd={blogPosting}
 >
   <article class="stack">
     <header>
       <h1 class="page-title">{title}</h1>
       <p class="meta">
-        <time datetime={pubDate.toISOString()}>{formatted}</time>
+        Published <time datetime={pubDate.toISOString()}>{formatted}</time>
+        {formattedUpdated && updatedDate && (
+          <> · Updated <time datetime={updatedDate.toISOString()}>{formattedUpdated}</time></>
+        )}
+        <span aria-hidden="true"> · </span>{readingMinutes} min read
       </p>
     </header>
+    {showTableOfContents && <TableOfContents headings={headings} />}
     <div class="prose">
       <slot />
     </div>
+    {relatedProject && (
+      <RelatedContent
+        eyebrow="Related project"
+        href={`/projects/${relatedProject.id}/`}
+        title={relatedProject.data.title}
+        description={relatedProject.data.tagline}
+      />
+    )}
     <p class="cta-row">
       <RssLink />
       <a href="/blog/">← All posts</a>

@@ -1,7 +1,8 @@
 ---
 import { render } from 'astro:content';
 import PostLayout from '../../layouts/PostLayout.astro';
-import { getPublishedPosts } from '../../lib/content';
+import { getProjectById, getPublishedPosts } from '../../lib/content';
+import { estimateReadingMinutes } from '../../lib/content-meta';
 
 export async function getStaticPaths() {
   const posts = await getPublishedPosts();
@@ -12,12 +13,22 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { Content } = await render(post);
+const { Content, headings } = await render(post);
+const readerHeadings = headings.filter(({ depth }) => depth === 2 || depth === 3);
+const readingMinutes = estimateReadingMinutes(post.body);
+const relatedProject = post.data.relatedProject
+  ? await getProjectById(post.data.relatedProject)
+  : undefined;
 ---
 <PostLayout
   title={post.data.title}
   description={post.data.description}
   pubDate={post.data.pubDate}
+  updatedDate={post.data.updatedDate}
+  ogImage={post.data.ogImage}
+  headings={readerHeadings}
+  readingMinutes={readingMinutes}
+  relatedProject={relatedProject}
 >
   <Content />
 </PostLayout>

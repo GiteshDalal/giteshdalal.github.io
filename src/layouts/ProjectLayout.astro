@@ -1,27 +1,60 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import ProjectOverview from '../components/ProjectOverview.astro';
+import RelatedContent from '../components/RelatedContent.astro';
+import TableOfContents from '../components/TableOfContents.astro';
+import type { MarkdownHeading } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+import { shouldShowTableOfContents } from '../lib/content-meta';
 
 interface Props {
   title: string;
   tagline: string;
   github: string;
   status?: 'active' | 'archived';
+  ogImage?: string;
+  overview?: CollectionEntry<'projects'>['data']['overview'];
+  headings: MarkdownHeading[];
+  readingMinutes: number;
+  relatedPost?: CollectionEntry<'blog'>;
 }
 
-const { title, tagline, github, status = 'active' } = Astro.props;
+const {
+  title,
+  tagline,
+  github,
+  status = 'active',
+  ogImage,
+  overview,
+  headings,
+  readingMinutes,
+  relatedPost,
+} = Astro.props;
+const showTableOfContents = shouldShowTableOfContents(readingMinutes, headings.length);
 ---
-<BaseLayout title={title} description={tagline}>
+<BaseLayout title={title} description={tagline} image={ogImage}>
   <article class="stack">
     <header>
       <h1 class="page-title">{title}</h1>
       <p class="meta">{tagline}{status === 'archived' ? ' · Archived' : ''}</p>
+      <p class="meta">{readingMinutes} min read</p>
       <p class="cta-row">
         <a class="button-link" href={github} rel="noopener noreferrer">View on GitHub</a>
         <a href="/projects/">← All projects</a>
       </p>
     </header>
+    {overview && <ProjectOverview overview={overview} github={github} />}
+    {showTableOfContents && <TableOfContents headings={headings} />}
     <div class="prose">
       <slot />
     </div>
+    {relatedPost && (
+      <RelatedContent
+        eyebrow="Related essay"
+        href={`/blog/${relatedPost.id}/`}
+        title={relatedPost.data.title}
+        description={relatedPost.data.description}
+      />
+    )}
   </article>
 </BaseLayout>

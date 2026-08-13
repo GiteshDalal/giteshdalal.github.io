@@ -3,16 +3,18 @@ import type { CollectionEntry } from 'astro:content';
 
 interface Props {
   project: CollectionEntry<'projects'>;
+  headingLevel?: 'h2' | 'h3';
 }
 
-const { project } = Astro.props;
+const { project, headingLevel = 'h3' } = Astro.props;
 const href = `/projects/${project.id}/`;
+const Heading = headingLevel;
 ---
 <article class="project-card">
   <p class="project-card-eyebrow">Open source</p>
-  <h3 class="project-card-title">
+  <Heading class="project-card-title">
     <a href={href}>{project.data.title}</a>
-  </h3>
+  </Heading>
   <p class="project-card-tagline">{project.data.tagline}</p>
   <p class="project-card-actions">
     <a href={href}>View project →</a>

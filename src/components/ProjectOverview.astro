@@ -1,0 +1,57 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+type Overview = NonNullable<CollectionEntry<'projects'>['data']['overview']>;
+
+interface Props {
+  overview: Overview;
+  github: string;
+}
+
+const { overview, github } = Astro.props;
+---
+<section class="project-overview" aria-labelledby="project-overview-title">
+  <div class="project-overview-heading">
+    <p class="project-overview-kicker">Project overview</p>
+    <h2 id="project-overview-title">A durable interface for human and agent intent</h2>
+  </div>
+
+  <dl class="project-overview-facts">
+    <div>
+      <dt>Audience</dt>
+      <dd>{overview.audience}</dd>
+    </div>
+    <div>
+      <dt>Problem</dt>
+      <dd>{overview.problem}</dd>
+    </div>
+  </dl>
+
+  <div class="project-overview-capabilities">
+    <h3>What it makes explicit</h3>
+    <ul>
+      {overview.capabilities.map((capability) => <li>{capability}</li>)}
+    </ul>
+  </div>
+
+  <div class="feature-bundle" aria-label={`Example feature bundle at ${overview.examplePath}`}>
+    <div class="feature-bundle-bar">
+      <span class="feature-bundle-path">{overview.examplePath}</span>
+      <span class="feature-bundle-tools">{overview.supports.join(' · ')}</span>
+    </div>
+    <ul>
+      {overview.exampleFiles.map((file) => (
+        <li><span aria-hidden="true">├─</span> {file}</li>
+      ))}
+    </ul>
+    <p class="feature-bundle-result"><span aria-hidden="true">✓</span> {overview.validation}</p>
+  </div>
+
+  <div class="project-overview-actions">
+    <div>
+      <p class="project-overview-action-label">Install</p>
+      <code>{overview.install}</code>
+    </div>
+    <a class="button-link" href={github} rel="noopener noreferrer">View FDF on GitHub</a>
+  </div>
+</section>

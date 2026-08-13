@@ -2,6 +2,8 @@
 title: "Three Years with AI"
 description: "How I went from pasting error messages into ChatGPT to making four AI agents write a fantasy novel — and why readers called it slop anyway."
 pubDate: 2026-07-12
+ogImage: "/og/three-years-with-ai.png"
+relatedProject: "fdf"
 ---
 
 We've all seen the flashy tech demos and hyperbolic headlines about what artificial intelligence can do. But what happens when you actually embed these tools into your daily workflow, day in and day out, for years?

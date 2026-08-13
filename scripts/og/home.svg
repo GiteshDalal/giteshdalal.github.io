@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#fafafa"/>
+  <rect x="72" y="72" width="10" height="486" rx="5" fill="#0b57d0"/>
+  <text x="118" y="112" fill="#111111" font-family="Montserrat, Arial, sans-serif" font-size="34" font-weight="800" letter-spacing="-1">GD</text>
+  <text x="995" y="108" fill="#666666" font-family="ui-monospace, Menlo, monospace" font-size="20">GITESHDALAL.COM</text>
+  <text x="118" y="244" fill="#111111" font-family="Montserrat, Arial, sans-serif" font-size="78" font-weight="800" letter-spacing="-3">Solution architecture</text>
+  <text x="118" y="330" fill="#111111" font-family="Montserrat, Arial, sans-serif" font-size="78" font-weight="800" letter-spacing="-3">for AI-assisted delivery.</text>
+  <text x="120" y="410" fill="#666666" font-family="Georgia, serif" font-size="31">Durable software. Explicit intent. Humans and agents in alignment.</text>
+  <line x1="118" y1="494" x2="1080" y2="494" stroke="#e5e5e5" stroke-width="2"/>
+  <text x="118" y="538" fill="#0b57d0" font-family="ui-monospace, Menlo, monospace" font-size="22" font-weight="700">FDF</text>
+  <text x="380" y="538" fill="#111111" font-family="ui-monospace, Menlo, monospace" font-size="22">LOW-COST COMMERCE</text>
+  <text x="785" y="538" fill="#111111" font-family="ui-monospace, Menlo, monospace" font-size="22">MULTI-AGENT WORKFLOWS</text>
+</svg>

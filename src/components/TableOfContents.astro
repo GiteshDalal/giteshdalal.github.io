@@ -1,0 +1,19 @@
+---
+import type { MarkdownHeading } from 'astro';
+
+interface Props {
+  headings: MarkdownHeading[];
+}
+
+const { headings } = Astro.props;
+---
+<nav class="table-of-contents" aria-label="Table of contents">
+  <p class="table-of-contents-title">On this page</p>
+  <ol>
+    {headings.map((heading) => (
+      <li class:list={{ 'table-of-contents-nested': heading.depth === 3 }}>
+        <a href={`#${heading.slug}`}>{heading.text}</a>
+      </li>
+    ))}
+  </ol>
+</nav>
