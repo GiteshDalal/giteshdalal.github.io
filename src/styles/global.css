@@ -802,6 +802,11 @@ a:hover {
   min-width: 0;
 }
 
+.project-overview-actions .button-link {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
 .project-overview-actions code {
   display: block;
   overflow-x: auto;

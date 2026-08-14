@@ -65,6 +65,27 @@ describe('long-form reader output', () => {
       /\.project-overview-actions code\{[^}]*white-space:nowrap[^}]*overflow-x:auto[^}]*\}/,
     );
   });
+
+  test('the lower FDF action matches the primary GitHub action and stays intact', async () => {
+    const html = await readPage('projects', 'fdf', 'index.html');
+    const styles = await readPageStyles(html);
+    const githubActionLabels = [
+      ...html.matchAll(
+        /<a class="button-link" href="https:\/\/github\.com\/GiteshDalal\/fdf" rel="noopener noreferrer">([^<]+)<\/a>/g,
+      ),
+    ].map(([, label]) => label);
+
+    expect({
+      githubActionLabels,
+      hasNonShrinkingSingleLineOverviewAction:
+        /\.project-overview-actions \.button-link\{(?=[^}]*flex-shrink:0)(?=[^}]*white-space:nowrap)[^}]*\}/.test(
+          styles,
+        ),
+    }).toEqual({
+      githubActionLabels: ['View on GitHub', 'View on GitHub'],
+      hasNonShrinkingSingleLineOverviewAction: true,
+    });
+  });
 });
 
 describe('homepage and navigation output', () => {
