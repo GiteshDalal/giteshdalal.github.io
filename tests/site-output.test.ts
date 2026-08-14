@@ -53,7 +53,7 @@ describe('long-form reader output', () => {
     expect(html).toContain('href="/blog/three-years-with-ai/"');
   });
 
-  test('the compiled FDF overview styles contain the install command locally', async () => {
+  test('the compiled FDF overview keeps the install command locally scrollable', async () => {
     const html = await readPage('projects', 'fdf', 'index.html');
     const styles = await readPageStyles(html);
 
@@ -62,29 +62,32 @@ describe('long-form reader output', () => {
     );
     expect(styles).toMatch(/\.project-overview>\*\{[^}]*min-width:0[^}]*\}/);
     expect(styles).toMatch(
-      /\.project-overview-actions code\{[^}]*white-space:nowrap[^}]*overflow-x:auto[^}]*\}/,
+      /\.project-install\{(?=[^}]*min-width:0)(?=[^}]*width:100%)[^}]*\}/,
     );
+    expect(styles).toMatch(
+      /\.project-install-command\{(?=[^}]*max-width:100%)(?=[^}]*overflow-x:auto)(?=[^}]*white-space:pre)[^}]*\}/,
+    );
+    expect(styles).not.toContain('.project-overview-actions');
   });
 
-  test('the lower FDF action matches the primary GitHub action and stays intact', async () => {
+  test('FDF exposes one GitHub action and a semantic copyable install command', async () => {
     const html = await readPage('projects', 'fdf', 'index.html');
-    const styles = await readPageStyles(html);
     const githubActionLabels = [
       ...html.matchAll(
         /<a class="button-link" href="https:\/\/github\.com\/GiteshDalal\/fdf" rel="noopener noreferrer">([^<]+)<\/a>/g,
       ),
     ].map(([, label]) => label);
 
-    expect({
-      githubActionLabels,
-      hasNonShrinkingSingleLineOverviewAction:
-        /\.project-overview-actions \.button-link\{(?=[^}]*flex-shrink:0)(?=[^}]*white-space:nowrap)[^}]*\}/.test(
-          styles,
-        ),
-    }).toEqual({
-      githubActionLabels: ['View on GitHub', 'View on GitHub'],
-      hasNonShrinkingSingleLineOverviewAction: true,
-    });
+    expect(githubActionLabels).toEqual(['View on GitHub']);
+    expect(html).toContain(
+      '<button class="project-install-copy" type="button" data-copy-command aria-label="Copy install command">',
+    );
+    expect(html).toContain(
+      '<pre class="project-install-command" tabindex="0" aria-labelledby="project-install-label"><code data-install-command>curl -fsSL https://raw.githubusercontent.com/GiteshDalal/fdf/main/install.sh | bash</code></pre>',
+    );
+    expect(html).toContain(
+      '<p class="visually-hidden" data-copy-status aria-live="polite" aria-atomic="true"></p>',
+    );
   });
 });
 

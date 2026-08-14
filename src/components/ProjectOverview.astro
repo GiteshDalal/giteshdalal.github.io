@@ -8,7 +8,7 @@ interface Props {
   github: string;
 }
 
-const { overview, github } = Astro.props;
+const { overview } = Astro.props;
 ---
 <section class="project-overview" aria-labelledby="project-overview-title">
   <div class="project-overview-heading">
@@ -47,11 +47,61 @@ const { overview, github } = Astro.props;
     <p class="feature-bundle-result"><span aria-hidden="true">✓</span> {overview.validation}</p>
   </div>
 
-  <div class="project-overview-actions">
-    <div>
-      <p class="project-overview-action-label">Install</p>
-      <code>{overview.install}</code>
+  <div class="project-install">
+    <div class="project-install-header">
+      <p class="project-overview-action-label" id="project-install-label">Install</p>
+      <button
+        class="project-install-copy"
+        type="button"
+        data-copy-command
+        aria-label="Copy install command"
+      >
+        <svg
+          class="project-install-copy-icon"
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          width="18"
+          height="18"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.75"
+        >
+          <rect x="8" y="8" width="11" height="11" rx="1.5"></rect>
+          <path d="M16 8V6.5A1.5 1.5 0 0 0 14.5 5h-8A1.5 1.5 0 0 0 5 6.5v8A1.5 1.5 0 0 0 6.5 16H8"></path>
+        </svg>
+        <svg
+          class="project-install-check-icon"
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          width="18"
+          height="18"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="m5 12 4 4L19 6"></path>
+        </svg>
+      </button>
     </div>
-    <a class="button-link" href={github} rel="noopener noreferrer">View on GitHub</a>
+    <pre class="project-install-command" tabindex="0" aria-labelledby="project-install-label"><code data-install-command>{overview.install}</code></pre>
+    <p class="visually-hidden" data-copy-status aria-live="polite" aria-atomic="true"></p>
   </div>
 </section>
+
+<script>
+  import { bindCopyCommand } from '../lib/copy-command';
+
+  document.querySelectorAll<HTMLButtonElement>('[data-copy-command]').forEach((button) => {
+    const installBlock = button.closest('.project-install');
+    const command = installBlock?.querySelector<HTMLElement>('[data-install-command]');
+    const status = installBlock?.querySelector<HTMLElement>('[data-copy-status]');
+
+    if (!command || !status) return;
+
+    bindCopyCommand({ button, command, status }, {
+      writeText: (text) => navigator.clipboard.writeText(text),
+      setTimer: (callback, delay) => window.setTimeout(callback, delay),
+      clearTimer: (timer) => window.clearTimeout(timer),
+    });
+  });
+</script>
