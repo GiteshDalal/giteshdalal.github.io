@@ -285,6 +285,12 @@ a:hover {
   vertical-align: top;
 }
 
+.prose blockquote {
+  margin: 1.75rem 0;
+  padding-left: 1.1rem;
+  border-left: 3px solid var(--border);
+}
+
 .meta {
   color: var(--muted);
   font-family: var(--font-sans);
