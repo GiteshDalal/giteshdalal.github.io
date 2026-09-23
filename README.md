@@ -77,7 +77,7 @@ Post body in Markdown.
 
 4. Publish: commit and push to `main` (see [Deploy](#deploy)).
 
-Example seed post: `src/content/blog/hello-world.md`.
+Example post: `src/content/blog/three-years-with-ai.md`.
 
 ## Add a project
 
@@ -179,7 +179,7 @@ src/
 ├── lib/                # collection lookups, metadata utilities, Markdown transforms
 ├── pages/              # routes
 ├── layouts/            # BaseLayout, PostLayout, ProjectLayout
-├── components/         # PostList, ProjectCard, RssLink
+├── components/         # PostList, FeaturedPost, ProjectCard, ProjectOverview, RelatedContent, RssLink, TableOfContents, ThemeToggle
 └── styles/global.css   # quiet technical + system light/dark
 public/                 # favicon, Open Graph images, and static assets
 scripts/og/             # editable SVG sources for social images
