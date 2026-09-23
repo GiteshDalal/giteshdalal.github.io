@@ -75,7 +75,7 @@ Agentic engineering is a structured way of working with agents:
 
 - **Specs before code.** A human approves what's being built and why, before an agent builds it.
 - **Context as documents, not vibes.** Stack, architecture, interface conventions, and infrastructure are written down where every agent and every teammate reads the same truth.
-- **Status that matches reality.** A feature is `draft`, `specified`, `planned`, `implementing`, or `done` — and that label must be true, not aspirational.
+- **Status that matches reality.** A feature is `draft`, `specified`, `planned`, `implementing`, `done`, or `retired` — and that label must be true, not aspirational.
 - **Verification by machine.** Consistency between docs and reality is checked by a tool, not by hoping everyone remembered.
 
 FDF exists to make this way of working cheap enough to actually adopt.
@@ -84,8 +84,8 @@ FDF exists to make this way of working cheap enough to actually adopt.
 
 FDF gives the engineering end of the spectrum a concrete, minimal shape:
 
-- **One bundle, one source of truth.** `docs/features/` holds four mandatory context documents — `STACK.md`, `ARCHITECTURE.md`, `SURFACES.md`, `INFRA.md` — as a living snapshot of the project that changes only with explicit human approval. Agents load these instead of guessing.
-- **Features as documents with a lifecycle.** `fdf new billing/invoices` scaffolds a feature; its spec, plan, acceptance tests, and task breakdown live beside it (`invoices.spec.md`, `invoices.plan.md`, `invoices.test.md`, `invoices/`). Frontmatter status walks `draft → specified → planned → implementing → done`.
+- **One bundle, one source of truth.** `docs/features/` holds five mandatory context documents — `STACK.md`, `ARCHITECTURE.md`, `SURFACES.md`, `INFRA.md`, `DOMAIN.md` — as a living snapshot of the project, down to its domain vocabulary, that changes only with explicit human approval. Agents load these instead of guessing.
+- **Features as documents with a lifecycle.** `fdf new billing/invoices` scaffolds a feature; its spec, plan, acceptance tests, and task breakdown live beside it (`invoices.spec.md`, `invoices.plan.md`, `invoices.test.md`, `invoices/`). Frontmatter status walks `draft → specified → planned → implementing → done`, and a delivered feature changes only through a recorded `Change` or `Fix`.
 - **Drift is a failing build, not a six-month discovery.** `fdf validate` checks the bundle's structural and consistency rules and exits non-zero on violations — wire it into CI and stale documentation stops being possible to merge.
 - **Agents that already know the rules.** `fdf install` wires skills into Claude Code, Codex, or OpenCode so your agents route work by feature status: brainstorm when there's no spec, plan when the spec is approved, execute when tasks exist.
 
@@ -102,7 +102,7 @@ FDF deliberately occupies a different layer:
 
 - **A format with a deterministic validator, not a workflow engine.** FDF defines what artifacts must exist, how they're named, and what consistency means — and a fast Go CLI enforces it with an exit code. Correctness doesn't depend on a model following instructions; it's checked the way a linter checks code.
 - **Tool-agnostic by design.** The bundle is plain Markdown + Gherkin in git. It works with Claude Code, Codex, and OpenCode today, and with whatever harness wins next year — because the interface between humans and agents is the documents, not any particular tool.
-- **Minimal surface.** Four context documents, a naming convention, a status lifecycle, and one validation command. There are no personas to configure and no pipeline to buy into. You can adopt FDF on an existing project in an afternoon.
+- **Minimal surface.** Five context documents, a naming convention, a status lifecycle, and one validation command. There are no personas to configure and no pipeline to buy into. You can adopt FDF on an existing project in an afternoon.
 - **Complementary, not competing.** Process skills like Superpowers govern *how an agent works right now*; FDF governs *what must exist and stay true in the repo forever*. They stack — and FDF is the layer that persists after every session ends.
 
 If you want a validated, permanent, tool-independent record of what your software does and why — the thing that makes the tenth month of a project as cheap as the first — that's the gap FDF fills.
