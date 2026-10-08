@@ -109,11 +109,21 @@ const structuredData = {
 
     <!-- Twitter / X Card -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@giteshdalal" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={imageURL} />
 
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EHMC8QFR61"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EHMC8QFR61');
+    </script>
 
     <!-- Apply saved or system theme before paint to avoid a flash -->
     <script is:inline>
