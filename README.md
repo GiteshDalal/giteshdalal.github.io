@@ -95,13 +95,16 @@ order: 1
 status: "active"
 # ogImage: "/og/project-name.png"
 # relatedPost: "post-id"
+# links:
+#   - label: "Reference docs"
+#     href: "https://example.com/docs"
 # overview:
 #   audience: "Who this is for"
 #   problem: "The problem it solves"
 #   capabilities: ["First", "Second", "Third"]
 #   supports: ["Tool name"]
 #   install: "install command"
-#   examplePath: "docs/features/example/"
+#   examplePath: "docs/fdf/features/example/"
 #   exampleFiles: ["example.spec.md"]
 #   validation: "validation result"
 ---
@@ -118,6 +121,7 @@ Project page body in Markdown.
 | `status` | no | `active` (default) or `archived` (shown on the page) |
 | `ogImage` | no | Site-root path to a page-specific 1200×630 social image |
 | `relatedPost` | no | Published blog collection id to show after the project narrative |
+| `links` | no | Pages about the project itself, such as its package docs: shown beside “View on GitHub” and listed with it as `sameAs` in the page's structured data |
 | `overview` | no | Product summary containing audience, problem, exactly three capabilities, supported tools, install command, example bundle, and validation result |
 
 3. Preview: `bun run dev` → open `/projects/your-slug/`.

@@ -24,6 +24,9 @@ const projects = defineCollection({
     status: z.enum(['active', 'archived']).default('active'),
     ogImage: z.string().optional(),
     relatedPost: z.string().optional(),
+    links: z
+      .array(z.object({ label: z.string(), href: z.string().url() }))
+      .default([]),
     overview: z
       .object({
         audience: z.string(),

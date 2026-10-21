@@ -6,6 +6,9 @@ order: 1
 status: "active"
 ogImage: "/og/fdf.png"
 relatedPost: "three-years-with-ai"
+links:
+  - label: "Command reference"
+    href: "https://pkg.go.dev/github.com/GiteshDalal/fdf/cli/cmd/fdf"
 overview:
   audience: "Teams building long-lived software with AI agents."
   problem: "Intent trapped in chat disappears, and documentation drifts away from the software."
@@ -17,17 +20,18 @@ overview:
     - "Claude Code"
     - "Codex"
     - "OpenCode"
-  install: "curl -fsSL https://raw.githubusercontent.com/GiteshDalal/fdf/main/install.sh | bash"
-  examplePath: "docs/features/payments/"
+  install: "curl -fsSL https://giteshdalal.com/fdf.sh | bash"
+  examplePath: "docs/fdf/features/payments/"
   exampleFiles:
-    - "payments.spec.md"
-    - "payments.plan.md"
-    - "payments.test.md"
-    - "payments/"
-  validation: "fdf validate — bundle valid"
+    - "refunds.md"
+    - "refunds.spec.md"
+    - "refunds.plan.md"
+    - "refunds.test.md"
+    - "refunds/"
+  validation: "fdf validate — conformant with FDF v1.2"
 ---
 
-**FDF** (Feature Document Format) is an open documentation format — plus an opinionated CLI that enforces it — for teams building software with AI agents. Every feature lives as Markdown + Gherkin in a validated `docs/features/` bundle: its design spec, implementation plan, acceptance tests, and tasks sit right beside it as stem-qualified siblings, and a status field tracks the feature from `draft` to `done`. The `fdf` CLI validates the whole bundle, so the documentation cannot silently drift away from reality.
+**FDF** (Feature Document Format) is an open documentation format — plus an opinionated CLI that enforces it — for teams building software with AI agents. Every feature lives as Markdown + Gherkin in a validated `docs/fdf/` bundle: its design spec, implementation plan, acceptance tests, and tasks sit right beside it as stem-qualified siblings, and a status field tracks the feature from `draft` to `done`. The `fdf` CLI validates the whole bundle, so the documentation cannot silently drift away from reality.
 
 To understand why that matters, you have to look at how AI-assisted development actually plays out over time.
 
@@ -75,7 +79,7 @@ Agentic engineering is a structured way of working with agents:
 
 - **Specs before code.** A human approves what's being built and why, before an agent builds it.
 - **Context as documents, not vibes.** Stack, architecture, interface conventions, and infrastructure are written down where every agent and every teammate reads the same truth.
-- **Status that matches reality.** A feature is `draft`, `specified`, `planned`, `implementing`, `done`, or `retired` — and that label must be true, not aspirational.
+- **Status that matches reality.** A feature is `draft`, `specified`, `planned`, `implementing`, `done`, or `retired` — or `adopted`, for code that predates the documents — and that label must be true, not aspirational.
 - **Verification by machine.** Consistency between docs and reality is checked by a tool, not by hoping everyone remembered.
 
 FDF exists to make this way of working cheap enough to actually adopt.
@@ -84,10 +88,11 @@ FDF exists to make this way of working cheap enough to actually adopt.
 
 FDF gives the engineering end of the spectrum a concrete, minimal shape:
 
-- **One bundle, one source of truth.** `docs/features/` holds five mandatory context documents — `STACK.md`, `ARCHITECTURE.md`, `SURFACES.md`, `INFRA.md`, `DOMAIN.md` — as a living snapshot of the project, down to its domain vocabulary, that changes only with explicit human approval. Agents load these instead of guessing.
-- **Features as documents with a lifecycle.** `fdf new billing/invoices` scaffolds a feature; its spec, plan, acceptance tests, and task breakdown live beside it (`invoices.spec.md`, `invoices.plan.md`, `invoices.test.md`, `invoices/`). Frontmatter status walks `draft → specified → planned → implementing → done`, and a delivered feature changes only through a recorded `Change` or `Fix`.
+- **One bundle, one source of truth.** `docs/fdf/` holds five mandatory context documents — `STACK.md`, `ARCHITECTURE.md`, `SURFACES.md`, `INFRA.md`, `DOMAIN.md` — as a living snapshot of the project, down to its domain vocabulary, that changes only with explicit human approval. Agents load these instead of guessing.
+- **Features as documents with a lifecycle.** `fdf new billing/invoices` scaffolds `features/billing/invoices.md`; its spec, plan, acceptance tests, and task breakdown live beside it (`invoices.spec.md`, `invoices.plan.md`, `invoices.test.md`, `invoices/`). Frontmatter status walks `draft → specified → planned → implementing → done`, and a delivered feature changes only through a recorded `Change` or `Fix`.
+- **What is unfinished or broken is on record.** Practices say how the project always does a recurring mechanism, such as permission checks; the debt register lists gaps the code has not closed yet, and the bug register lists defects nobody has repaired yet. Existing code comes in as `adopted` features, documented as it stands rather than given an invented history.
 - **Drift is a failing build, not a six-month discovery.** `fdf validate` checks the bundle's structural and consistency rules and exits non-zero on violations — wire it into CI and stale documentation stops being possible to merge.
-- **Agents that already know the rules.** `fdf install` wires skills into Claude Code, Codex, or OpenCode so your agents route work by feature status: brainstorm when there's no spec, plan when the spec is approved, execute when tasks exist.
+- **Agents that already know the rules.** `fdf install` wires skills into Claude Code, Codex, or OpenCode so your agents route work by feature status: brainstorm when there's no spec, plan when the spec is approved, execute when tasks exist — and debug a defect to its root cause before anyone writes a fix.
 
 The result: any agent, in any session, on any machine, opens the repo and finds the same intent, the same architecture, and the same current state — without a human re-explaining it in chat.
 
@@ -107,16 +112,40 @@ FDF deliberately occupies a different layer:
 
 If you want a validated, permanent, tool-independent record of what your software does and why — the thing that makes the tenth month of a project as cheap as the first — that's the gap FDF fills.
 
-## Try it
+## Get started
 
-The preferred way to install is the one-line script:
+Install the `fdf` CLI on macOS or Linux. The script downloads the latest release, verifies its checksum, and puts `fdf` in `~/.local/bin`:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/GiteshDalal/fdf/main/install.sh | bash
+curl -fsSL https://giteshdalal.com/fdf.sh | bash
 ```
 
-- Alternatively, install from [GitHub releases](https://github.com/GiteshDalal/fdf/releases), [mise](https://mise.jdx.dev), or `go install`
-- `fdf init` scaffolds a bundle; `fdf new group/slug` adds a feature; `fdf validate` enforces the rules
-- `fdf install` wires skills into Claude Code, Codex, or OpenCode
+That short link runs the [installer in the fdf repository](https://github.com/GiteshDalal/fdf/blob/main/install.sh), so it is always the current one. `FDF_VERSION=vX.Y.Z` pins a release and `FDF_INSTALL_DIR` picks another directory. You can also download a binary for macOS, Linux, or Windows from [GitHub releases](https://github.com/GiteshDalal/fdf/releases), pin one per project with [mise](https://mise.jdx.dev) (`mise use ubi:GiteshDalal/fdf`), or build it with Go 1.26 or later:
 
-Full source, specs, and docs live on GitHub.
+```sh
+go install github.com/GiteshDalal/fdf/cli/cmd/fdf@latest
+```
+
+Then, in the repository you want to document:
+
+```sh
+fdf init                           # the bundle, in docs/fdf/
+fdf install --project claude-code  # or codex, or opencode
+fdf new payments/refunds           # a draft feature
+fdf validate                       # exit 1 on any violation
+```
+
+`fdf init` writes the bundle with its spec and five Context stubs, `fdf install` gives your agent the skills, and `fdf new` files `features/payments/refunds.md`.
+
+Ask your agent to fill the five Context documents first. The `fdf-init` skill interviews you for each one, and validation fails once a feature exists while any of them is still a stub. On an existing codebase, `fdf adopt` then maps what the code already does.
+
+To keep the documents honest on every pull request, run `fdf validate` in CI: it exits 0 when the bundle conforms, 1 on any violation, and 2 on a usage error.
+
+The current version is **1.2**. It adds a tag dictionary (`TAGS.md`) that defines every tag once, and 0–9 `cost` and `effort` ratings that order the debt and bug registers. `fdf migrate` takes a 1.0 or 1.1 bundle up without editing any document, and upgrades a bundle from before 1.0.
+
+## Reference
+
+- [Command reference](https://pkg.go.dev/github.com/GiteshDalal/fdf/cli/cmd/fdf): every command, the bundle layout, and CI setup
+- [Go module](https://pkg.go.dev/github.com/GiteshDalal/fdf): the README, including how to upgrade a bundle
+- [Format spec](https://github.com/GiteshDalal/fdf/blob/main/SPEC.md): the rules `fdf validate` enforces, which every bundle also carries as `SPEC.md`
+- [Source on GitHub](https://github.com/GiteshDalal/fdf): code, issues, and [releases](https://github.com/GiteshDalal/fdf/releases)

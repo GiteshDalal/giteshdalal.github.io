@@ -7,16 +7,16 @@
   <rect x="68" y="326" width="1064" height="236" rx="8" fill="#111111"/>
   <rect x="68" y="326" width="1064" height="52" rx="8" fill="#1c1c1c"/>
   <rect x="68" y="370" width="1064" height="8" fill="#1c1c1c"/>
-  <text x="94" y="360" fill="#8ab4f8" font-family="ui-monospace, Menlo, monospace" font-size="19" font-weight="700">docs/features/payments/</text>
+  <text x="94" y="360" fill="#8ab4f8" font-family="ui-monospace, Menlo, monospace" font-size="19" font-weight="700">docs/fdf/features/payments/</text>
   <text x="1106" y="360" fill="#a0a0a0" font-family="ui-monospace, Menlo, monospace" font-size="17" text-anchor="end">CLAUDE CODE · CODEX · OPENCODE</text>
   <text x="96" y="418" fill="#666666" font-family="ui-monospace, Menlo, monospace" font-size="21">├─</text>
-  <text x="135" y="418" fill="#f2f2f2" font-family="ui-monospace, Menlo, monospace" font-size="21">payments.spec.md</text>
+  <text x="135" y="418" fill="#f2f2f2" font-family="ui-monospace, Menlo, monospace" font-size="21">refunds.spec.md</text>
   <text x="96" y="454" fill="#666666" font-family="ui-monospace, Menlo, monospace" font-size="21">├─</text>
-  <text x="135" y="454" fill="#f2f2f2" font-family="ui-monospace, Menlo, monospace" font-size="21">payments.plan.md</text>
+  <text x="135" y="454" fill="#f2f2f2" font-family="ui-monospace, Menlo, monospace" font-size="21">refunds.plan.md</text>
   <text x="96" y="490" fill="#666666" font-family="ui-monospace, Menlo, monospace" font-size="21">├─</text>
-  <text x="135" y="490" fill="#f2f2f2" font-family="ui-monospace, Menlo, monospace" font-size="21">payments.test.md</text>
-  <text x="665" y="418" fill="#a0a0a0" font-family="ui-monospace, Menlo, monospace" font-size="20">status: implementing</text>
-  <text x="665" y="466" fill="#8ab4f8" font-family="ui-monospace, Menlo, monospace" font-size="20">feature bundles → lifecycle → validation</text>
+  <text x="135" y="490" fill="#f2f2f2" font-family="ui-monospace, Menlo, monospace" font-size="21">refunds.test.md</text>
+  <text x="1106" y="418" fill="#a0a0a0" font-family="ui-monospace, Menlo, monospace" font-size="20" text-anchor="end">status: implementing</text>
+  <text x="1106" y="466" fill="#8ab4f8" font-family="ui-monospace, Menlo, monospace" font-size="20" text-anchor="end">feature bundles → lifecycle → validation</text>
   <line x1="94" y1="514" x2="1106" y2="514" stroke="#2a2a2a" stroke-width="2"/>
-  <text x="96" y="546" fill="#8ab4f8" font-family="ui-monospace, Menlo, monospace" font-size="20" font-weight="700">✓ fdf validate — bundle valid</text>
+  <text x="96" y="546" fill="#8ab4f8" font-family="ui-monospace, Menlo, monospace" font-size="20" font-weight="700">✓ fdf validate — conformant with FDF v1.2</text>
 </svg>

@@ -1,5 +1,6 @@
 import { describe, expect, test } from 'bun:test';
-import { readFile } from 'node:fs/promises';
+import { chmod, mkdtemp, readFile, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
 const distPath = (...parts: string[]) => join(import.meta.dir, '..', 'dist', ...parts);
@@ -47,8 +48,9 @@ describe('long-form reader output', () => {
 
     expect(html).toContain('Audience');
     expect(html).toContain('Teams building long-lived software with AI agents.');
-    expect(html).toContain('docs/features/payments/');
-    expect(html).toContain('curl -fsSL https://raw.githubusercontent.com/GiteshDalal/fdf/main/install.sh | bash');
+    expect(html).toContain('docs/fdf/features/payments/');
+    expect(html).toContain('fdf validate — conformant with FDF v1.2');
+    expect(html).toContain('curl -fsSL https://giteshdalal.com/fdf.sh | bash');
     expect(html).toContain('aria-label="Table of contents"');
     expect(html).toContain('href="/blog/three-years-with-ai/"');
   });
@@ -83,11 +85,87 @@ describe('long-form reader output', () => {
       '<button class="project-install-copy" type="button" data-copy-command aria-label="Copy install command">',
     );
     expect(html).toContain(
-      '<pre class="project-install-command" tabindex="0" aria-labelledby="project-install-label"><code data-install-command>curl -fsSL https://raw.githubusercontent.com/GiteshDalal/fdf/main/install.sh | bash</code></pre>',
+      '<pre class="project-install-command" tabindex="0" aria-labelledby="project-install-label"><code data-install-command>curl -fsSL https://giteshdalal.com/fdf.sh | bash</code></pre>',
     );
     expect(html).toContain(
       '<p class="visually-hidden" data-copy-status aria-live="polite" aria-atomic="true"></p>',
     );
+  });
+});
+
+describe('FDF reference links', () => {
+  const commandReference = 'https://pkg.go.dev/github.com/GiteshDalal/fdf/cli/cmd/fdf';
+
+  test('the FDF page links to its command reference beside the GitHub action', async () => {
+    const html = await readPage('projects', 'fdf', 'index.html');
+    const [actions] = html.match(/<p class="cta-row">.*?<\/p>/s) ?? [''];
+
+    expect(actions).toContain(`<a href="${commandReference}" rel="noopener">Command reference</a>`);
+  });
+
+  test('the FDF page describes the software and its reference pages in structured data', async () => {
+    const html = await readPage('projects', 'fdf', 'index.html');
+    const [, json] = html.match(/<script type="application\/ld\+json">(.*?)<\/script>/s) ?? [];
+    const graph = JSON.parse(json)['@graph'] as Record<string, unknown>[];
+
+    expect(graph).toContainEqual(
+      expect.objectContaining({
+        '@type': 'SoftwareSourceCode',
+        name: 'FDF - Feature Document Format',
+        url: 'https://giteshdalal.com/projects/fdf/',
+        codeRepository: 'https://github.com/GiteshDalal/fdf',
+        sameAs: ['https://github.com/GiteshDalal/fdf', commandReference],
+        author: { '@id': 'https://giteshdalal.com/#person' },
+      }),
+    );
+  });
+});
+
+describe('short FDF install link', () => {
+  const installer = 'https://raw.githubusercontent.com/GiteshDalal/fdf/main/install.sh';
+
+  // A curl that serves a stand-in installer from the fdf repository's URL and fails for any other.
+  async function fakeCurl(): Promise<string> {
+    const bin = await mkdtemp(join(tmpdir(), 'fdf-sh-'));
+    await writeFile(
+      join(bin, 'curl'),
+      [
+        '#!/bin/sh',
+        'for arg; do url=$arg; done',
+        `[ "$url" = "${installer}" ] || exit 22`,
+        `echo 'echo "installer ran with: $*"'`,
+        `echo 'echo "install dir: $FDF_INSTALL_DIR"'`,
+        '',
+      ].join('\n'),
+    );
+    await chmod(join(bin, 'curl'), 0o755);
+    return bin;
+  }
+
+  function runShortLink(bin: string) {
+    const result = Bun.spawnSync({
+      cmd: ['bash', distPath('fdf.sh'), '--version', 'v1.2.0'],
+      env: { PATH: `${bin}:/usr/bin:/bin`, FDF_INSTALL_DIR: '/opt/fdf' },
+    });
+    return { exitCode: result.exitCode, stdout: result.stdout.toString(), stderr: result.stderr.toString() };
+  }
+
+  test('fdf.sh runs the installer kept in the fdf repository, passing arguments and environment', async () => {
+    const result = runShortLink(await fakeCurl());
+
+    expect(result.exitCode).toBe(0);
+    expect(result.stdout).toBe('installer ran with: --version v1.2.0\ninstall dir: /opt/fdf\n');
+  });
+
+  test('fdf.sh fails, naming the installer, when it cannot download it', async () => {
+    const bin = await fakeCurl();
+    await writeFile(join(bin, 'curl'), '#!/bin/sh\nexit 22\n');
+
+    const result = runShortLink(bin);
+
+    expect(result.exitCode).not.toBe(0);
+    expect(result.stdout).toBe('');
+    expect(result.stderr).toContain(installer);
   });
 });
 

@@ -11,6 +11,7 @@ interface Props {
   title: string;
   tagline: string;
   github: string;
+  links?: { label: string; href: string }[];
   status?: 'active' | 'archived';
   ogImage?: string;
   overview?: CollectionEntry<'projects'>['data']['overview'];
@@ -23,6 +24,7 @@ const {
   title,
   tagline,
   github,
+  links = [],
   status = 'active',
   ogImage,
   overview,
@@ -31,8 +33,19 @@ const {
   relatedPost,
 } = Astro.props;
 const showTableOfContents = shouldShowTableOfContents(readingMinutes, headings.length);
+const pageURL = new URL(Astro.url.pathname, Astro.site).href;
+const software = {
+  '@type': 'SoftwareSourceCode',
+  '@id': `${pageURL}#software`,
+  name: title,
+  description: tagline,
+  url: pageURL,
+  codeRepository: github,
+  sameAs: [github, ...links.map(({ href }) => href)],
+  author: { '@id': new URL('#person', Astro.site).href },
+};
 ---
-<BaseLayout title={title} description={tagline} image={ogImage}>
+<BaseLayout title={title} description={tagline} image={ogImage} jsonLd={software}>
   <article class="stack">
     <header>
       <h1 class="page-title">{title}</h1>
@@ -40,6 +53,7 @@ const showTableOfContents = shouldShowTableOfContents(readingMinutes, headings.l
       <p class="meta">{readingMinutes} min read</p>
       <p class="cta-row">
         <a class="button-link" href={github} rel="noopener noreferrer">View on GitHub</a>
+        {links.map(({ label, href }) => <a href={href} rel="noopener">{label}</a>)}
         <a href="/projects/">← All projects</a>
       </p>
     </header>

@@ -43,7 +43,8 @@ Use the current [Astro documentation](https://docs.astro.build) and consult the 
 - Preserve an author's existing meaning. Surface current interests only when they are already stated in repository content.
 - Blog entries require `title`, `description`, and `pubDate`. Optional fields are `draft`, `updatedDate`, `ogImage`, and `relatedProject`.
 - Supply `updatedDate` only after a material article edit; it controls visible update metadata and `dateModified` structured data.
-- Project entries require `title`, `tagline`, and `github`. Optional fields are `order`, `status`, `ogImage`, `relatedPost`, and `overview`.
+- Project entries require `title`, `tagline`, and `github`. Optional fields are `order`, `status`, `ogImage`, `relatedPost`, `links`, and `overview`.
+- Project `links` are `label`/`href` pairs for pages about the project itself, such as its package documentation; they appear beside the GitHub action and as `sameAs` in its `SoftwareSourceCode` structured data.
 - Related-content values are collection ids without slashes or extensions and must resolve to published content.
 - A project `overview` contains `audience`, `problem`, exactly three `capabilities`, one or more `supports` values, `install`, `examplePath`, one or more `exampleFiles`, and `validation`.
 - Page-specific Open Graph images live in `public/og/`; editable source artwork lives in `scripts/og/`. Social PNGs must be 1200×630.
