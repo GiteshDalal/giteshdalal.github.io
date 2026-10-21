@@ -40,7 +40,9 @@ const activeSection = path === '/' ? 'home' : path.startsWith('/blog/')
   ? 'blog'
   : path.startsWith('/projects/')
     ? 'projects'
-    : undefined;
+    : path.startsWith('/follow/')
+      ? 'follow'
+      : undefined;
 
 const personId = `${siteURL}#person`;
 const websiteId = `${siteURL}#website`;
@@ -62,6 +64,7 @@ const baseJsonLd: Record<string, unknown>[] = [
     sameAs: [
       'https://github.com/GiteshDalal',
       'https://www.linkedin.com/in/giteshdalal',
+      'https://x.com/giteshdalal',
     ],
   },
 ];
@@ -157,7 +160,7 @@ const structuredData = {
         <a class="nav-home" href="/" aria-current={activeSection === 'home' ? 'page' : undefined}>Home</a>
         <a href="/blog/" aria-current={activeSection === 'blog' ? 'page' : undefined}>Blog</a>
         <a href="/projects/" aria-current={activeSection === 'projects' ? 'page' : undefined}>Projects</a>
-        <a href="/rss.xml">RSS</a>
+        <a href="/follow/" aria-current={activeSection === 'follow' ? 'page' : undefined}>Follow</a>
       </nav>
     </header>
     <main class="site-main" id="main-content">
@@ -165,12 +168,16 @@ const structuredData = {
     </main>
     <footer class="site-footer">
       <p class="site-footer-lead">
-        New posts via <a href="/rss.xml">RSS</a> — subscribe in your reader for future updates.
+        <a href="/follow/">Follow</a> for new posts on X, LinkedIn or <a href="/rss.xml">RSS</a>.
       </p>
       <p class="site-footer-meta">
         <a href="https://github.com/GiteshDalal" rel="noopener noreferrer">GitHub</a>
         <span class="hero-ctas-sep" aria-hidden="true">·</span>
-        <span>© {new Date().getFullYear()} <a href="https://www.linkedin.com/in/giteshdalal" rel="me noopener noreferrer">Gitesh Dalal</a></span>
+        <a href="https://www.linkedin.com/in/giteshdalal" rel="me noopener noreferrer">LinkedIn</a>
+        <span class="hero-ctas-sep" aria-hidden="true">·</span>
+        <a href="https://x.com/giteshdalal" rel="me noopener noreferrer">X</a>
+        <span class="hero-ctas-sep" aria-hidden="true">·</span>
+        <span>©{new Date().getFullYear()} <a href="https://www.linkedin.com/in/giteshdalal" rel="me noopener noreferrer">Gitesh Dalal</a></span>
       </p>
     </footer>
   </body>

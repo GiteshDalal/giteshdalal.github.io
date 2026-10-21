@@ -180,24 +180,64 @@ describe('homepage and navigation output', () => {
     expect(html).toContain('Low-cost commerce rewrite');
     expect(html).toContain('Multi-agent workflows');
     expect(html).toContain('<a href="/projects/fdf/">Explore FDF</a>');
+    expect(html).toContain('<a href="https://x.com/giteshdalal" rel="me">Connect on X</a>');
+  });
+
+  test('the site names its author\'s profiles, X among them, in structured data', async () => {
+    const html = await readPage('index.html');
+    const [, json] = html.match(/<script type="application\/ld\+json">(.*?)<\/script>/s) ?? [];
+    const graph = JSON.parse(json)['@graph'] as Record<string, unknown>[];
+
+    expect(graph).toContainEqual(
+      expect.objectContaining({
+        '@type': 'Person',
+        sameAs: expect.arrayContaining(['https://x.com/giteshdalal']),
+      }),
+    );
   });
 
   test.each([
     ['index.html'],
     ['blog', 'index.html'],
     ['projects', 'index.html'],
-  ])('every primary page exposes the skip target and calls the feed RSS', async (...parts) => {
+  ])('every primary page exposes the skip target and where to follow new posts', async (...parts) => {
     const html = await readPage(...parts);
+    const [nav] = html.match(/<nav class="site-nav".*?<\/nav>/s) ?? [''];
+    const [lead] = html.match(/<p class="site-footer-lead">.*?<\/p>/s) ?? [''];
 
     expect(html).toContain('<a class="skip-link" href="#main-content">Skip to content</a>');
     expect(html).toContain('<main class="site-main" id="main-content">');
-    expect(html).toContain('<a href="/rss.xml">RSS</a>');
-    expect(html).not.toContain('<a href="/rss.xml">Subscribe</a>');
+    expect(html).toContain('<link rel="alternate" type="application/rss+xml"');
+    expect(nav).toContain('<a href="/follow/">Follow</a>');
+    expect(nav).not.toContain('href="/rss.xml"');
+    expect(lead).toContain('<a href="/follow/">Follow</a>');
+    expect(lead).toContain('<a href="/rss.xml">RSS</a>');
+  });
+
+  test.each([
+    ['index.html'],
+    ['blog', 'index.html'],
+    ['projects', 'fdf', 'index.html'],
+  ])('every page footer links to GitHub, LinkedIn and X', async (...parts) => {
+    const html = await readPage(...parts);
+    const [footer] = html.match(/<p class="site-footer-meta">.*?<\/p>/s) ?? [''];
+    const links = [...footer.matchAll(/<a href="([^"]+)"[^>]*>([^<]+)<\/a>/g)].map(
+      ([, href, label]) => [label, href],
+    );
+
+    expect(links).toEqual(
+      expect.arrayContaining([
+        ['GitHub', 'https://github.com/GiteshDalal'],
+        ['LinkedIn', 'https://www.linkedin.com/in/giteshdalal'],
+        ['X', 'https://x.com/giteshdalal'],
+      ]),
+    );
   });
 
   test.each([
     [['blog', 'index.html'], '/blog/'],
     [['projects', 'index.html'], '/projects/'],
+    [['follow', 'index.html'], '/follow/'],
   ])('marks the active primary navigation entry', async (parts, href) => {
     const html = await readPage(...parts);
 
@@ -209,6 +249,27 @@ describe('homepage and navigation output', () => {
 
     expect(html).toMatch(/<h2 class="project-card-title">\s*<a href="\/projects\/fdf\/">/);
     expect(html).not.toMatch(/<h3 class="project-card-title">\s*<a href="\/projects\/fdf\/">/);
+  });
+});
+
+describe('follow page output', () => {
+  test('lists X, then LinkedIn, then the RSS feed, under one heading', async () => {
+    const html = await readPage('follow', 'index.html');
+    const [main] = html.match(/<main .*?<\/main>/s) ?? [''];
+    const links = [...main.matchAll(/<a href="([^"]+)"[^>]*>([^<]+)<\/a>/g)].map(
+      ([, href, label]) => [label, href],
+    );
+
+    expect(html.match(/<h1(?:\s|>)/g)).toHaveLength(1);
+    expect(main).toContain('<h1 class="page-title">Follow</h1>');
+    expect(links).toEqual([
+      ['Follow on X', 'https://x.com/giteshdalal'],
+      ['Connect on LinkedIn', 'https://www.linkedin.com/in/giteshdalal'],
+      ['RSS', '/rss.xml'],
+    ]);
+    expect(main).toContain('Subscribe in your reader for updates');
+    expect(main).toContain('https://giteshdalal.com/rss.xml');
+    expect(html).toContain('<link rel="canonical" href="https://giteshdalal.com/follow/">');
   });
 });
 

@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const feedURL = new URL('/rss.xml', Astro.site).href;
+---
+<BaseLayout
+  title="Follow"
+  description="Follow new posts on AI and software on X, LinkedIn or RSS."
+>
+  <div class="stack">
+    <div>
+      <h1 class="page-title">Follow</h1>
+      <p class="meta">New posts on AI and software, wherever you read.</p>
+    </div>
+    <ul class="follow-list">
+      <li>
+        <a href="https://x.com/giteshdalal" rel="me noopener noreferrer">Follow on X</a>
+        <span>Every new post, as it is published. @giteshdalal</span>
+      </li>
+      <li>
+        <a href="https://www.linkedin.com/in/giteshdalal" rel="me noopener noreferrer">Connect on LinkedIn</a>
+        <span>New posts, shared on LinkedIn too.</span>
+      </li>
+      <li>
+        <a href="/rss.xml">RSS</a>
+        <span>Subscribe in your reader for updates: <code>{feedURL}</code></span>
+      </li>
+    </ul>
+  </div>
+</BaseLayout>
