@@ -1,42 +1,42 @@
 ---
 title: "When You Step Away"
-description: "Grok Bot, OpenAI's Dots and Claude Duet shipped within ten weeks of each other, and they are one product: an agent with its own computer, your logins, a memory and an approval queue. What that changes for the engineers whose systems those agents touch, and for the architects who have to draw them."
+description: "Grok Bot, Meta's Muse, OpenAI's Dots and Claude Duet shipped within ten weeks of each other, and they are one product: an agent with its own computer, your logins, a memory and an approval queue. What that changes for the engineers whose systems those agents touch, and for the architects who have to draw them."
 pubDate: 2026-10-27
 draft: true
 relatedProject: "fdf"
 ---
 
-Three companies launched an always-on AI agent in ten weeks, and two of them sold it with the same words.
+Four companies launched an always-on AI agent in ten weeks, and two of them sold it with the same words.
 
 xAI, on 11 August: Grok Bot's agents "share a computer of their own in the cloud, so jobs do not stall when you step away."
 
 Anthropic, on 21 October: Claude Duet "[keeps working when you step away](https://x.com/claudeai/status/2112984664256241837), and checks with you before it acts on your behalf."
 
-In between, on 29 September, OpenAI launched Dots at DevDay with the same promise in different words: agents that carry on after you close the chat, and come back with finished work for approval.
+In between, Meta launched Muse on 8 September and OpenAI launched Dots at DevDay on 29 September, both with the same promise in different words: agents that carry on after you close the chat, and come back when they need your approval.
 
 When you step away. That phrase is the whole announcement. For as long as most of us have used these tools, stepping away ended the work. You closed the tab and the agent stopped, because there was nothing left to drive it. These launches are the end of that assumption, and most of what changes for engineers and architects follows from it.
 
 ---
 
-## Three launches, one product
+## Four launches, one product
 
-Read the three launch pages side by side and the differences are mostly branding.
+Read the four launches side by side and the differences are mostly branding.
 
 [Grok Bot](https://x.ai/news/introducing-grok-bot) is "your team of always-on agents." The bots sign into the tools you already use, "including platforms with no clean API or MCP," remember how you like things done, and "only come back when something needs your approval." You can run several at once, with one acting as a chief of staff over specialists. It started as an internal prototype, and xAI says teams there built bots for sales outbound, marketing campaigns, office operations and bug fixes.
+
+[Muse](https://www.deeplearning.ai/the-batch/how-to-secure-agents-for-the-masses) is Meta's, running on its own Muse Spark model and open only in the US so far. It works on its own cloud computer with a browser, connects to email, calendars, Instagram and Facebook, and keeps a memory you can read, edit and tell to forget. It leans furthest toward personal errands — booking travel, filling in forms, buying things — and asks before sensitive actions such as sending an email or making a purchase. A free tier sits under paid plans at $20 and $100 a month.
 
 [Dots](https://venturebeat.com/technology/openai-launches-dots-always-on-ai-agent-coworkers-and-chatgpt-space-where-they-can-collaborate-with-human-teams) run on GPT-6 Astra. Each gets its own cloud computer and browser, connects to more than 4,000 apps, learns your preferences and standards, and can be reached in ChatGPT, Slack or Teams. While you are inactive, a Dot reviews your connected apps for anything that needs attention. Alongside them OpenAI launched [ChatGPT Space](https://chatgpt.com/features/space/), a shared layer where employees, ChatGPT, Codex and Dots work against the same context.
 
 [Claude Duet](https://claude.com/product/claude-duet) runs on Opus 5.5 in its own cloud computer, with more than 6,000 connectors and plugins. It "briefs you every morning, drafts next steps, then goes quiet until something needs you." For now it is a research preview, on a US waitlist for Pro and Max subscribers.
 
-Meta's [Muse](https://www.iclarified.com/102030/meta-launches-muse-a-personal-ai-agent-that-handles-everyday-tasks) launched on 8 September in the same shape, which makes it four.
-
-| | Grok Bot | Dots | Claude Duet |
-| --- | --- | --- | --- |
-| Launched | 11 August, beta | 29 September | 21 October, research preview |
-| Where it works | One cloud computer, shared by all your bots | Its own cloud computer and browser | Its own cloud computer |
-| What it reaches | Your tools, including ones with no clean API | 4,000+ apps | 6,000+ connectors and plugins |
-| What it remembers | Conversations, and how you like things done | Your preferences, standards and habits | Your history with Claude and your connected apps |
-| When it comes back | When something needs your approval | When your rules or its own review say ask | When something needs you |
+| | Grok Bot | Muse | Dots | Claude Duet |
+| --- | --- | --- | --- | --- |
+| Launched | 11 August, beta | 8 September, US only | 29 September | 21 October, research preview |
+| Where it works | One cloud computer, shared by all your bots | Its own cloud computer, with a separate agent guarding what leaves it | Its own cloud computer and browser | Its own cloud computer |
+| What it reaches | Your tools, including ones with no clean API | Email, calendars, browsers, Instagram, Facebook | 4,000+ apps | 6,000+ connectors and plugins |
+| What it remembers | Conversations, and how you like things done | A memory you can read, edit and make it forget | Your preferences, standards and habits | Your history with Claude and your connected apps |
+| When it comes back | When something needs your approval | Before it sends an email or buys something | When your rules or its own review say ask | When something needs you |
 
 Every column gives the same answers. A computer that isn't yours. Your logins. A memory that outlives the conversation. A queue of decisions waiting for you to come back. The only real difference is where each product draws the line between "it just does it" and "it asks first", and I'll come back to that line, because it's the part you will end up designing.
 
@@ -55,7 +55,7 @@ Something goes with it that was never written down anywhere: the session was als
             and the rules it works by     and comes back for approval
 ```
 
-[Agents Don't Know How to Stop](/blog/agents-dont-know-how-to-stop/) ended on a question: is the thing keeping an agent in its lane a wall or a preference? A standing agent no longer has your attention as its wall. What stops it now is whatever you set up before you left: the goal, the rules about what it may do alone, and the limits of the computer it runs on. All three companies know this, which is why the approval queue is a headline feature on every launch page, not a footnote.
+[Agents Don't Know How to Stop](/blog/agents-dont-know-how-to-stop/) ended on a question: is the thing keeping an agent in its lane a wall or a preference? A standing agent no longer has your attention as its wall. What stops it now is whatever you set up before you left: the goal, the rules about what it may do alone, and the limits of the computer it runs on. All four companies know this, which is why the approval queue is a headline feature on every launch page, not a footnote.
 
 ---
 
@@ -91,7 +91,9 @@ That gives engineers a head start, and a specific one. We've already met every f
 
 That isn't a scandal. It's honest documentation, saying what the marketing didn't. A separate bot is a separate work surface, not a separate security boundary: if a payroll bot and a recruiting bot sit on the same account, the recruiting bot can use the payroll bot's open session. For every one of these products, the first question in a design review is what is actually isolated from what — per agent, per user, or per organisation — and the answer you trust is the one in the docs.
 
-**Approval policy is architecture now.** Every product draws the line between acting and asking somewhere. Dots let users or administrators mark each action as allowed, needing approval, or prohibited; some, such as changing a password, stay with the human, and the background work a Dot does while you're away is read-only. Duet asks before sending messages or paying, and [won't trade securities or move money between accounts](https://techcrunch.com/2026/10/22/claude-duet-app-is-anthropics-bet-on-agents/). Muse has a separate Sentinel agent review anything it sends to the internet. xAI's docs list what to keep behind approval — sending, publishing, purchasing, deletion, production changes — and add a sentence worth reading twice: "An approval controls the proposed action. It does not reverse work already completed."
+Muse shows the other end of the range. Meta keeps credentials out of the agent's reach altogether: the agent works with stand-in tokens, and a separate Sentinel agent approves each request and swaps in the real credentials only as the request leaves its VM. As The Batch [put it](https://www.deeplearning.ai/the-batch/how-to-secure-agents-for-the-masses), "Muse Spark 1.3 never sees credentials." So within one product category, one design shares open sessions and command-line credentials across every bot on an account, and another never lets its agent see a credential at all. The launch pages don't tell you which end you're buying.
+
+**Approval policy is architecture now.** Every product draws the line between acting and asking somewhere. Dots let users or administrators mark each action as allowed, needing approval, or prohibited; some, such as changing a password, stay with the human, and the background work a Dot does while you're away is read-only. Duet asks before sending messages or paying, and [won't trade securities or move money between accounts](https://techcrunch.com/2026/10/22/claude-duet-app-is-anthropics-bet-on-agents/). Muse binds each approval to one connector or destination and one purpose, and lets you limit it to a single action, a session, a task or a span of time. xAI's docs list what to keep behind approval — sending, publishing, purchasing, deletion, production changes — and add a sentence worth reading twice: "An approval controls the proposed action. It does not reverse work already completed."
 
 Someone has to decide those tiers for every system an agent can reach, and in most organisations that will be an architect. My starting point:
 
